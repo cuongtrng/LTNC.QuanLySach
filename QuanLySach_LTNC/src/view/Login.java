@@ -1,27 +1,40 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import controller.LoginController;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Cuong
- */
 public class Login extends javax.swing.JFrame {
+    private static Login f=null;
 
-    /**
-     * Creates new form Login
-     */
     public Login() {
         initComponents();
+    }
+    
+    public static Login getInstance(){
+        if (f == null){
+            f=new Login();
+        }
+        return f;
+    }
+    
+    private void login(){
+        String username= usernameField.getText();
+        String password= passwordField.getText();
+        try {
+            if (LoginController.isAccountVaild(username, password)){
+                System.out.println("Đăng nhập thành công.");
+            } else {
+                System.out.println("Tài khoản hoặc mật khẩu không đúng.");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -47,10 +60,27 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
+        usernameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usernameFieldKeyPressed(evt);
+            }
+        });
+
+        passwordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordFieldKeyPressed(evt);
+            }
+        });
+
         loginbtn.setText("Login");
         loginbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginbtnActionPerformed(evt);
+            }
+        });
+        loginbtn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                loginbtnKeyPressed(evt);
             }
         });
 
@@ -114,26 +144,34 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
-        this.dispose();
-        LoginOption lo=new LoginOption();
-        lo.setVisible(true);
+        LoginOption.getInstance().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_backbtnActionPerformed
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
-        String username= usernameField.getText();
-        String password= passwordField.getText();
-        try {
-            if (LoginController.isAccountVaild(username, password)){
-                System.out.println("Đăng nhập thành công.");
-            } else {
-                System.out.println("Tài khoản hoặc mật khẩu không đúng.");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        login();
     }//GEN-LAST:event_loginbtnActionPerformed
+
+    private void usernameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_TAB) {
+            passwordField.requestFocus();
+        }
+    }//GEN-LAST:event_usernameFieldKeyPressed
+
+    private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            login();
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_TAB) {
+            loginbtn.requestFocus();
+        }
+    }//GEN-LAST:event_passwordFieldKeyPressed
+
+    private void loginbtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginbtnKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            login();
+        }
+    }//GEN-LAST:event_loginbtnKeyPressed
 
     /**
      * @param args the command line arguments
