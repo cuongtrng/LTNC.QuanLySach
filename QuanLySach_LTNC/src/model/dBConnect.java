@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class dBConnect {
-    private static final String db_url = "jdbc:mysql://localhost/quanlysach";
+    private static final String db_url = "jdbc:mysql://localhost/library1?serverTimezone=UTC";
     private static final String user_name = "root";
     private static final String password = "12345";
     private static final String className = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
