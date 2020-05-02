@@ -32,14 +32,18 @@ public class Login extends javax.swing.JFrame {
                 if (type == 1){
                     if (LoginController.isAdminAccountVaild(username, password)){
                     System.out.println("Đăng nhập thành công.");
-                    // Hien cua so admin va dispose cua so nay
+                    this.dispose();
+                    View.Admin ad = new View.Admin();
+                    ad.show();
                 } else {
                     System.out.println("Tài khoản hoặc mật khẩu không đúng.");
                 }
                 }   else if (type == 2){
                     if (LoginController.isStaffAccountVaild(username, password)){
                         System.out.println("Đăng nhập thành công.");
-                        // Hien cua so staff va dispose cua so nay
+                        this.dispose();
+                        View.Staff sta=new View.Staff();
+                        sta.show();
                     } else {
                         System.out.println("Tài khoản hoặc mật khẩu không đúng.");
                     }
