@@ -50,6 +50,14 @@ public class Admin extends JFrame implements ActionListener{
     private JButton searchstaff;    private JTextField txtsearch;   private JLabel searchname;
     private JScrollPane scrollPane_staff;
     
+    private static Admin f=null;
+    public static Admin getInstance(){
+        if (f == null){
+            f=new Admin();
+        }
+        return f;
+    }
+    
     public Admin()
     {
         this.setSize(1000, 700);

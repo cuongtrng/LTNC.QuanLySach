@@ -33,6 +33,13 @@ public class Staff extends JFrame implements ActionListener{
     private JButton b1; private JButton b2;private JButton b3;private JButton b4;
     private JButton b5; private JButton b6;private JButton b7;private JButton b8;
     private JLabel hi;
+    private static Staff f=null;
+    public static Staff getInstance(){
+        if (f == null){
+            f=new Staff();
+        }
+        return f;
+    }
     public Staff()
     {
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -87,13 +94,17 @@ public class Staff extends JFrame implements ActionListener{
         b8 = new JButton(icon8);b8.setBounds(800, 360, 200, 320);this.add(b8);
         
         search.addActionListener(this);
+        signout.addActionListener(this);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == search)
         {
+//            this.setVisible(false);
+            Search.getInstance();
+        } if(e.getSource() == signout){
             this.dispose();
-            Search nl = new Search();
+            view.Login.getInstance().setVisible(true);
         }
     }
     

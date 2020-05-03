@@ -42,13 +42,20 @@ public class Search extends JFrame implements ActionListener{
     
     private JPanel searchbill;
     private JPanel searchcustomer;
+    private static Search f=null;
+    public static Search getInstance(){
+        if (f == null){
+            f=new Search();
+        }
+        return f;
+    }
     public Search()
     {
         search = new JFrame("Search");
         search.setSize(1000, 700);
         //search.setLayout(null);
         search.setVisible(true);
-        search.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        search.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         search.getContentPane().setBackground(new Color(255,255,255));
         //search.setLocationByPlatform(true);
         
