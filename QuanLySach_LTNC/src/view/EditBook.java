@@ -270,7 +270,7 @@ public class EditBook extends javax.swing.JFrame {
 
     private void btnScategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScategoryActionPerformed
         model.setRowCount(0);
-        search("Cateory_id");
+        search("Category_id");
     }//GEN-LAST:event_btnScategoryActionPerformed
 
     private void txtcategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcategoryActionPerformed

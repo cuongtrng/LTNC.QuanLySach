@@ -28,11 +28,13 @@ public class AddBook extends javax.swing.JFrame {
      */
     private ArrayList<Book> list;
     DefaultTableModel model;
+    private int id;
     public AddBook() {
         initComponents();
         list= new ArrayList<>();
         model= (DefaultTableModel) jTable1.getModel();
-        
+        AddBookController ab= new AddBookController();
+        id= ab.getLastID()+1;
     }
 
     /**
@@ -198,12 +200,10 @@ public class AddBook extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void btnaddbookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddbookActionPerformed
         Book b= new Book();
-        AddBookController ab= new AddBookController();
-        b.setID(ab.getLastID()+1);
-        
+        b.setID(id++);
         //b.setID(Integer.parseInt(txtID.getText()));
         b.setName(txtname.getText());
         b.setAmount(Integer.parseInt(txtamount.getText()));

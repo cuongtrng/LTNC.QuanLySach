@@ -130,13 +130,14 @@ public class SearchController {
             dBConnect.close();
         }
     }
-    public ArrayList searchBook(String text,String type){
         ArrayList<Book> list= new ArrayList<>();
+    public ArrayList searchBook(String text,String type){
+       
         //String header[] = {"Id","Name","Phone","Email","Address","Shift_count","Start_work_date","UserName","Password"};
         //DefaultTableModel model = new DefaultTableModel();
        // model.setColumnIdentifiers(header);
         String sql = "select * From book";
-        Book b= new Book();
+        
         if (text.length() > 0) 
         {
             sql = sql + " where "+type+" like '%" + text+ "%'";
@@ -151,6 +152,7 @@ public class SearchController {
             {
                 while(rs.next())
                 {
+                    Book b= new Book();
                     b.setID(rs.getInt("id"));
                     b.setName(rs.getString("Name"));
                     b.setCategoryID(rs.getString("Category_id"));
