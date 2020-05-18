@@ -1,60 +1,27 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package view;
 
 import controller.LoginController;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author Cuong
+ */
 public class Login extends javax.swing.JFrame {
-    private static Login f=null;
-    private int type = 0;
 
+    /**
+     * Creates new form Login
+     */
     public Login() {
         initComponents();
-    }
-    
-    public static Login getInstance(){
-        if (f == null){
-            f=new Login();
-        } else {
-            // Khi chuyen doi giua cac form thi xoa truong password
-            f.passwordField.setText("");
-        }
-        return f;
-    }
-    
-    private void login(){
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        try {
-                if (type == 1){
-                    if (LoginController.isAdminAccountVaild(username, password)){
-                    System.out.println("Đăng nhập thành công.");
-                    this.setVisible(false);
-                    View.Admin.getInstance().setVisible(true);
-//                    View.Admin ad = new View.Admin();
-//                    ad.show();
-                } else {
-                    System.out.println("Tài khoản hoặc mật khẩu không đúng.");
-                }
-                }   else if (type == 2){
-                    if (LoginController.isStaffAccountVaild(username, password)){
-                        System.out.println("Đăng nhập thành công.");
-                        this.setVisible(false);
-                        View.Staff.getInstance().setVisible(true);
-//                        View.Staff sta=new View.Staff();
-//                        sta.show();
-                    } else {
-                        System.out.println("Tài khoản hoặc mật khẩu không đúng.");
-                    }
-                } 
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -66,7 +33,6 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
@@ -74,26 +40,12 @@ public class Login extends javax.swing.JFrame {
         loginbtn = new javax.swing.JButton();
         backbtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        adminRbtn = new javax.swing.JRadioButton();
-        staffRbtn = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Username");
 
         jLabel2.setText("Password");
-
-        usernameField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                usernameFieldKeyPressed(evt);
-            }
-        });
-
-        passwordField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                passwordFieldKeyPressed(evt);
-            }
-        });
 
         loginbtn.setText("Login");
         loginbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -112,22 +64,6 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Login");
 
-        buttonGroup1.add(adminRbtn);
-        adminRbtn.setText("Admin");
-        adminRbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adminRbtnActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(staffRbtn);
-        staffRbtn.setText("Staff");
-        staffRbtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffRbtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -138,21 +74,17 @@ public class Login extends javax.swing.JFrame {
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(loginbtn)
+                                    .addComponent(passwordField)))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(staffRbtn)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(adminRbtn)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(loginbtn)
-                                            .addComponent(passwordField)))))))
+                                    .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(backbtn)))
@@ -173,11 +105,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(adminRbtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(staffRbtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(loginbtn)
                 .addGap(23, 23, 23))
         );
@@ -186,34 +114,26 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
-        LoginOption.getInstance().setVisible(true);
-        this.setVisible(false);
+        this.dispose();
+        LoginOption lo=new LoginOption();
+        lo.setVisible(true);
     }//GEN-LAST:event_backbtnActionPerformed
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
-        login();
+        String username= usernameField.getText();
+        String password= passwordField.getText();
+        try {
+            if (LoginController.isAccountVaild(username, password)){
+                System.out.println("Đăng nhập thành công.");
+            } else {
+                System.out.println("Tài khoản hoặc mật khẩu không đúng.");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_loginbtnActionPerformed
-
-    private void usernameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameFieldKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_TAB) {
-            passwordField.setText("");
-            passwordField.requestFocus();
-        }
-    }//GEN-LAST:event_usernameFieldKeyPressed
-
-    private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            login();
-        }
-    }//GEN-LAST:event_passwordFieldKeyPressed
-
-    private void adminRbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminRbtnActionPerformed
-       type = 1;
-    }//GEN-LAST:event_adminRbtnActionPerformed
-
-    private void staffRbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffRbtnActionPerformed
-       type = 2;
-    }//GEN-LAST:event_staffRbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,15 +171,12 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton adminRbtn;
     private javax.swing.JButton backbtn;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton loginbtn;
     private javax.swing.JPasswordField passwordField;
-    private javax.swing.JRadioButton staffRbtn;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }
