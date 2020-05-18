@@ -5,19 +5,21 @@
  */
 package model;
 
-import java.io.Serializable;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import java.time.Year;
+import java.util.Date;
 
 /**
  *
  * @author loiph
  */
-public class Book  implements Serializable{
-    private int ID,amount,price;
-    private String name,category,author;
+public class Book {
+    private int ID, amount, price;
+    private String name, categoryID, author;
+    private int publisYear;
 
-    @Override
-    public String toString() {
-        return "Book{" + "ID=" + ID + ", amount=" + amount + ", price=" + price + ", name=" + name + ", category=" + category + ", author=" + author + '}';
+    public void setPublisYear(int publisYear) {
+        this.publisYear = publisYear;
     }
 
     public void setID(int ID) {
@@ -36,13 +38,15 @@ public class Book  implements Serializable{
         this.name = name;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryID(String categoryID) {
+        this.categoryID = categoryID;
     }
 
     public void setAuthor(String author) {
         this.author = author;
     }
+
+   
 
     public int getID() {
         return ID;
@@ -60,12 +64,23 @@ public class Book  implements Serializable{
         return name;
     }
 
-    public String getCategory() {
-        return category;
+    public String getCategoryID() {
+        return categoryID;
     }
 
     public String getAuthor() {
         return author;
     }
+
+    public int getPublisYear() {
+        return publisYear;
+    }
+    
+    
+
+ 
+    
+            
+          
     
 }

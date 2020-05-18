@@ -95,6 +95,7 @@ public class Staff extends JFrame implements ActionListener{
         
         search.addActionListener(this);
         signout.addActionListener(this);
+        stock.addActionListener(this);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -105,7 +106,11 @@ public class Staff extends JFrame implements ActionListener{
         } if(e.getSource() == signout){
             this.dispose();
             view.Login.getInstance().setVisible(true);
+        } if (e.getSource()==stock){
+            new view.AddBook().setVisible(true);
+            this.dispose();
         }
+        
     }
     
 }

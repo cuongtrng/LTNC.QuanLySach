@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import model.Book;
 
 /**
  *
@@ -62,7 +64,7 @@ public class SearchController {
                     data = new Vector();
                     data.add(rs.getInt("id"));
                     data.add(rs.getString("Name"));
-                    data.add(rs.getString("Category id"));
+                    data.add(rs.getString("Category_id"));
                     data.add(rs.getString("Author"));
                     data.add(rs.getString("PublishYear"));
                     data.add(rs.getInt("Amount"));
@@ -127,6 +129,53 @@ public class SearchController {
         {
             dBConnect.close();
         }
-    }    
+    }
+    public ArrayList searchBook(String text,String type){
+        ArrayList<Book> list= new ArrayList<>();
+        //String header[] = {"Id","Name","Phone","Email","Address","Shift_count","Start_work_date","UserName","Password"};
+        //DefaultTableModel model = new DefaultTableModel();
+       // model.setColumnIdentifiers(header);
+        String sql = "select * From book";
+        Book b= new Book();
+        if (text.length() > 0) 
+        {
+            sql = sql + " where "+type+" like '%" + text+ "%'";
+        }
+        try 
+        {
+            Statement st = dBConnect.getConnect().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            Vector data = null;
+            //model.setRowCount(0);
+            if(rs != null)
+            {
+                while(rs.next())
+                {
+                    b.setID(rs.getInt("id"));
+                    b.setName(rs.getString("Name"));
+                    b.setCategoryID(rs.getString("Category_id"));
+                    b.setAuthor(rs.getString("Author"));
+                    b.setPublisYear(rs.getInt("PublishYear"));
+                    b.setAmount(rs.getInt("Amount"));
+                    b.setPrice(rs.getInt("Price"));
+                    list.add(b);
+                    
+                }
+            }
+            //b.setModel(model);
+        
+            st.close();
+            rs.close();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally
+        {
+            dBConnect.close();
+        }
+        return list;
+        
+    }
         
 }
