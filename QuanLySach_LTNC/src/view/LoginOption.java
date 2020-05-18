@@ -1,18 +1,22 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package view;
 
+/**
+ *
+ * @author Cuong
+ */
 public class LoginOption extends javax.swing.JFrame {
-    private static LoginOption f=null;
 
+    /**
+     * Creates new form LoginOption
+     */
     public LoginOption() {
         initComponents();
     }
-    
-    public static LoginOption getInstance(){
-        if (f == null){
-            f=new LoginOption();
-        }
-        return f;
-    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,8 +82,9 @@ public class LoginOption extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginbtnActionPerformed
-        Login.getInstance().setVisible(true);
-        this.setVisible(false);
+        Login lo=new Login();
+        this.dispose();
+        lo.setVisible(true);
     }//GEN-LAST:event_loginbtnActionPerformed
 
     private void faceidbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_faceidbtnActionPerformed
