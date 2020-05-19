@@ -42,8 +42,15 @@ CREATE TABLE `staff` (
   `UserName` varchar(100) NOT NULL UNIQUE,
   `Password` varchar(100) NOT NULL
 );
+
+--
+-- Đổ dữ liệu cho bảng staff
+--
+
+
 INSERT INTO `staff` (`id`, `Name`,`Phone`, `Email`,`Address`,`Shift_count`,`Start_work_date`, `UserName`, `Password`) VALUES
 (2, 'Nguyễn Thị Thanh Ngân', '0359172536','staff@test.com', '3 Tạ Quang Bửu, Hai Bà Trưng', 123,null,'ngan','1234');
+
 --
 -- Cấu trúc bảng cho bảng `book`
 --
@@ -100,6 +107,21 @@ INSERT INTO `customer` (`id`, `Name`, `Phone`, `Email`, `Address`, `Expireddate`
 (1, 'test', '085461587', 'test@gmail.com', '133 hồng mai','2020-04-18 00:00:00', true);
 
 --
+-- Cấu trúc cho bảng `BillDetail`
+--
+
+create table `BillDetail` (
+	`id` int(11) not null,
+    `BookId` int(11) not null,
+    `Amount` int(11) not null  
+);
+--
+-- Đổ dữ liệu cho bảng BillDetail:
+--
+insert Into `BillDetail`  (`id`, `BookId`, `Amount`) values ( 1,1,3);
+insert Into `BillDetail`  (`id`, `BookId`, `Amount`) values ( 1,2,3);
+
+--
 -- Chỉ mục cho các bảng đã đổ
 --
 
@@ -125,14 +147,21 @@ ALTER TABLE `book`
 -- Chỉ mục cho bảng `bill`
 --
 ALTER TABLE `bill`
-  ADD PRIMARY KEY (`id`,`BookId`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `FK_book` (`BookId`),
   ADD KEY `FK_customer` (`CustomerId`),
   ADD KEY `FK_staff` (`StaffId`);
 
 --
+-- Chỉ mục cho bảng BillDetail
+--
+ALTER TABLE `BillDetail`
+	ADD PRIMARY KEY (`id`,`BookId`);
+    
+--
 -- Chỉ mục cho bảng `customer`
 --
+
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`);
 --
@@ -170,6 +199,10 @@ ALTER TABLE `customer`
 -- Các ràng buộc cho bảng `bill`
 --
 ALTER TABLE `bill`
-  ADD CONSTRAINT `FK_bookid` FOREIGN KEY (`BookId`) REFERENCES `book` (`id`),
+  ADD CONSTRAINT `FK_id` FOREIGN KEY (`id`) REFERENCES `BillDetail` (`id`),
   ADD CONSTRAINT `FK_customerid` FOREIGN KEY (`CustomerId`) REFERENCES `customer` (`id`),
   ADD CONSTRAINT `FK_staffid` FOREIGN KEY (`StaffId`) REFERENCES `staff` (`id`);
+
+-- Các ràng buộc cho bảng `BillDetail`
+alter table `BillDetail`
+	add constraint `FK_bookid` foreign key (`BookId`) references `book` (`id`)
