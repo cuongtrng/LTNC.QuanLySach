@@ -17,7 +17,6 @@ import java.time.Year;
 import java.util.ArrayList;
 import model.Book;
 import model.dBConnect;
-import static model.dBConnect.conn;
 import view.AddBook;
 
 /**

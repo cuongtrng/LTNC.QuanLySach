@@ -23,6 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Book;
+import model.Staff;
 
 /**
  *
@@ -84,6 +85,7 @@ public class SearchController {
             dBConnect.close();
         }
     }
+    
     public void SearchStaff(JTable b, String name)
     {
         String header[] = {"Id","Name","Phone","Email","Address","Shift_count","Start_work_date","UserName","Password"};
@@ -94,35 +96,35 @@ public class SearchController {
         {
             sql = sql + " where Name like '%" + name + "%'";
         }
-        try 
-        {
+        try {
             Statement st = dBConnect.getConnect().createStatement();
             ResultSet rs = st.executeQuery(sql);
-            Vector data = null;
             model.setRowCount(0);
             if(rs != null)
             {
                 while(rs.next())
                 {
-                    data = new Vector();
-                    data.add(rs.getInt("id"));
-                    data.add(rs.getString("Name"));
-                    data.add(rs.getString("Phone"));
-                    data.add(rs.getString("Email"));
-                    data.add(rs.getString("Address"));
-                    data.add(rs.getInt("Shift_count"));
-                    data.add(rs.getTimestamp("Start_work_date"));
-                    data.add(rs.getString("UserName"));
-                    data.add(rs.getString("Password"));
+                    Staff stf = new Staff();
+                    stf.setId(rs.getInt("id"));
+                    stf.setName(rs.getString("name"));
+                    stf.setPhone(rs.getString("Phone"));
+                    stf.setEmail(rs.getString("Email"));
+                    stf.setAddress(rs.getString("Address"));
+                    stf.setShift_count(rs.getInt("Shift_count"));
+                    stf.setStart_work_date(rs.getTimestamp("Start_work_date"));
+                    stf.setUsername(rs.getString("UserName"));
+                    stf.setPassword(rs.getString("Password"));
+                    Object []data = {stf.getId(),stf.getName(),stf.getPhone(),stf.getEmail(),stf.getAddress(),
+                        stf.getShift_count(),stf.getStart_work_date(),stf.getUsername(),stf.getPassword()};
                     model.addRow(data);
                 }
+                
             }
             b.setModel(model);
         
             st.close();
             rs.close();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(SearchController.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally
@@ -136,7 +138,7 @@ public class SearchController {
         //DefaultTableModel model = new DefaultTableModel();
        // model.setColumnIdentifiers(header);
         String sql = "select * From book";
-        Book b= new Book();
+        
         if (text.length() > 0) 
         {
             sql = sql + " where "+type+" like '%" + text+ "%'";
@@ -151,6 +153,7 @@ public class SearchController {
             {
                 while(rs.next())
                 {
+                    Book b= new Book();
                     b.setID(rs.getInt("id"));
                     b.setName(rs.getString("Name"));
                     b.setCategoryID(rs.getString("Category_id"));
@@ -177,5 +180,4 @@ public class SearchController {
         return list;
         
     }
-        
 }

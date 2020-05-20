@@ -74,13 +74,6 @@ public class Book {
 
     public int getPublisYear() {
         return publisYear;
-    }
-    
-    
-
- 
-    
-            
-          
+    }         
     
 }

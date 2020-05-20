@@ -33,7 +33,7 @@ public class Login extends javax.swing.JFrame {
                     if (LoginController.isAdminAccountVaild(username, password)){
                     System.out.println("Đăng nhập thành công.");
                     this.setVisible(false);
-                    View.Admin.getInstance().setVisible(true);
+                    View.ViewAdmin.getInstance().setVisible(true);
 //                    View.Admin ad = new View.Admin();
 //                    ad.show();
                 } else {
@@ -43,7 +43,7 @@ public class Login extends javax.swing.JFrame {
                     if (LoginController.isStaffAccountVaild(username, password)){
                         System.out.println("Đăng nhập thành công.");
                         this.setVisible(false);
-                        View.Staff.getInstance().setVisible(true);
+                        View.ViewStaff.getInstance().setVisible(true);
 //                        View.Staff sta=new View.Staff();
 //                        sta.show();
                     } else {
