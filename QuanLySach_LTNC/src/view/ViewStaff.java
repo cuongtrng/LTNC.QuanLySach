@@ -110,7 +110,6 @@ public class ViewStaff extends JFrame implements ActionListener{
         {
 //            this.setVisible(false);
             ViewSearch f=new ViewSearch();
-            f.show();
         } 
         //dang xuat
         if(e.getSource() == signout){

@@ -31,15 +31,13 @@ public class Login extends javax.swing.JFrame {
         try {
                 if (type == 1){
                     if (LoginController.isAdminAccountVaild(username, password)){
-                    System.out.println("Đăng nhập thành công.");
-                    this.setVisible(false);
-                    View.ViewAdmin.getInstance().setVisible(true);
-//                    View.Admin ad = new View.Admin();
-//                    ad.show();
-                } else {
-                    System.out.println("Tài khoản hoặc mật khẩu không đúng.");
-                }
-                }   else if (type == 2){
+                        System.out.println("Đăng nhập thành công.");
+                        this.setVisible(false);
+                        View.ViewAdmin.getInstance().setVisible(true);
+                    } else {
+                        System.out.println("Tài khoản hoặc mật khẩu không đúng.");
+                    }
+                } else if (type == 2){
                     if (LoginController.isStaffAccountVaild(username, password)){
                         System.out.println("Đăng nhập thành công.");
                         this.setVisible(false);
@@ -83,12 +81,14 @@ public class Login extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
+        usernameField.setText("ngan");
         usernameField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 usernameFieldKeyPressed(evt);
             }
         });
 
+        passwordField.setText("1234");
         passwordField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 passwordFieldKeyPressed(evt);

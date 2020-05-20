@@ -82,7 +82,7 @@ public class AddBook extends javax.swing.JFrame {
 
         jLabel7.setText("Price");
 
-        btnaddbook.setText("AddBook");
+        btnaddbook.setText("Add Book");
         btnaddbook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnaddbookActionPerformed(evt);
@@ -154,7 +154,7 @@ public class AddBook extends javax.swing.JFrame {
                             .addComponent(txtamount, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 675, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,7 +240,8 @@ public class AddBook extends javax.swing.JFrame {
             }    
         }
         if(kt){
-            JOptionPane.showMessageDialog(rootPane, "add success");
+            JOptionPane.showMessageDialog(rootPane, "Add success");
+            model.setRowCount(0);
         }else{
             JOptionPane.showMessageDialog(rootPane, "Add fail");
         }
