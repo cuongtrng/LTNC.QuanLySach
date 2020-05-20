@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
     private static Login f=null;
@@ -28,14 +29,18 @@ public class Login extends javax.swing.JFrame {
     private void login(){
         String username = usernameField.getText();
         String password = passwordField.getText();
-        try {
+        if ("".equals(username) || "".equals(password) || type == 0){
+            JOptionPane.showMessageDialog(rootPane, "Thông tin đăng nhập chưa đầy đủ.");
+        } else{
+           try {
                 if (type == 1){
                     if (LoginController.isAdminAccountVaild(username, password)){
                         System.out.println("Đăng nhập thành công.");
                         this.setVisible(false);
                         View.ViewAdmin.getInstance().setVisible(true);
                     } else {
-                        System.out.println("Tài khoản hoặc mật khẩu không đúng.");
+                        JOptionPane.showMessageDialog(rootPane, "Tài khoản hoặc mật khẩu không đúng.");
+//                        System.out.println("Tài khoản hoặc mật khẩu không đúng.");
                     }
                 } else if (type == 2){
                     if (LoginController.isStaffAccountVaild(username, password)){
@@ -45,13 +50,15 @@ public class Login extends javax.swing.JFrame {
 //                        View.Staff sta=new View.Staff();
 //                        sta.show();
                     } else {
-                        System.out.println("Tài khoản hoặc mật khẩu không đúng.");
+                        JOptionPane.showMessageDialog(rootPane, "Tài khoản hoặc mật khẩu không đúng.");
+//                        System.out.println("Tài khoản hoặc mật khẩu không đúng.");
                     }
                 } 
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } 
         }
     }
 
@@ -89,11 +96,6 @@ public class Login extends javax.swing.JFrame {
         });
 
         passwordField.setText("1234");
-        passwordField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                passwordFieldKeyPressed(evt);
-            }
-        });
 
         loginbtn.setText("Login");
         loginbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -200,12 +202,6 @@ public class Login extends javax.swing.JFrame {
             passwordField.requestFocus();
         }
     }//GEN-LAST:event_usernameFieldKeyPressed
-
-    private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            login();
-        }
-    }//GEN-LAST:event_passwordFieldKeyPressed
 
     private void adminRbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminRbtnActionPerformed
        type = 1;

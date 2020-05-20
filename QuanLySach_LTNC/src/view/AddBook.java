@@ -240,10 +240,10 @@ public class AddBook extends javax.swing.JFrame {
             }    
         }
         if(kt){
-            JOptionPane.showMessageDialog(rootPane, "Add success");
+            JOptionPane.showMessageDialog(rootPane, "Thêm thành công.");
             model.setRowCount(0);
         }else{
-            JOptionPane.showMessageDialog(rootPane, "Add fail");
+            JOptionPane.showMessageDialog(rootPane, "Thêm thất bại.");
         }
     }//GEN-LAST:event_btnsaveActionPerformed
 
