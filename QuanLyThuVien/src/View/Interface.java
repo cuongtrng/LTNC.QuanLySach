@@ -25,6 +25,7 @@ public class Interface extends javax.swing.JFrame {
         idLabel.setText("Your id is: " + id);
         if (type){
             adminBtn.setEnabled(false);
+            home.setEnabled(false);
         } else {
             staffBtn.setEnabled(false);
         }
@@ -57,6 +58,7 @@ public class Interface extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        logoutBtn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         logoutBtn.setText("Log out");
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,16 +79,16 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(profileTabLayout.createSequentialGroup()
                 .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(profileTabLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(logoutBtn))
-                    .addGroup(profileTabLayout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(idLabel)
                             .addGroup(profileTabLayout.createSequentialGroup()
                                 .addComponent(staffBtn)
                                 .addGap(108, 108, 108)
-                                .addComponent(adminBtn)))))
+                                .addComponent(adminBtn))))
+                    .addGroup(profileTabLayout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(449, Short.MAX_VALUE))
         );
         profileTabLayout.setVerticalGroup(
@@ -98,9 +100,9 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(staffBtn)
                     .addComponent(adminBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
-                .addComponent(logoutBtn)
-                .addGap(25, 25, 25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
+                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
         home.addTab("Profile", profileTab);
