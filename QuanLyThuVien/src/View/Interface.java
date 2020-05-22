@@ -18,10 +18,19 @@ public class Interface extends javax.swing.JFrame {
     /**
      * Creates new form Interface
      */
-    public Interface() {
+    public Interface(int id, boolean type) {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTitle("Home");
+        idLabel.setText("Your id is: " + id);
+        if (type){
+            adminBtn.setEnabled(false);
+        } else {
+            staffBtn.setEnabled(false);
+        }
+//        System.out.println("Khoi tao home "+ n);
+//        customerTab.setEnabled(false);
+//        jButton1.setEnabled(false);
     }
     
     /**
@@ -33,158 +42,165 @@ public class Interface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        profileTab = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jPanel2 = new javax.swing.JPanel();
-        jToggleButton3 = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
+        home = new javax.swing.JTabbedPane();
+        profileTab = new javax.swing.JPanel();
+        logoutBtn = new javax.swing.JButton();
+        staffBtn = new javax.swing.JButton();
+        adminBtn = new javax.swing.JButton();
+        idLabel = new javax.swing.JLabel();
+        bookTab = new javax.swing.JPanel();
+        billTab = new javax.swing.JPanel();
+        reportTab = new javax.swing.JPanel();
+        adminTab = new javax.swing.JPanel();
+        staffTab = new javax.swing.JPanel();
+        customerTab = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jToggleButton1.setText("jToggleButton1");
+        logoutBtn.setText("Log out");
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
 
-        jToggleButton2.setText("jToggleButton2");
+        staffBtn.setText("Staff");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(217, 217, 217)
-                .addComponent(jToggleButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(380, Short.MAX_VALUE)
-                .addComponent(jToggleButton2)
-                .addGap(340, 340, 340))
+        adminBtn.setText("Admin");
+
+        idLabel.setText("Your id is: ");
+
+        javax.swing.GroupLayout profileTabLayout = new javax.swing.GroupLayout(profileTab);
+        profileTab.setLayout(profileTabLayout);
+        profileTabLayout.setHorizontalGroup(
+            profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(profileTabLayout.createSequentialGroup()
+                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(profileTabLayout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(logoutBtn))
+                    .addGroup(profileTabLayout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(idLabel)
+                            .addGroup(profileTabLayout.createSequentialGroup()
+                                .addComponent(staffBtn)
+                                .addGap(108, 108, 108)
+                                .addComponent(adminBtn)))))
+                .addContainerGap(449, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(167, 167, 167)
-                .addComponent(jToggleButton1)
-                .addGap(36, 36, 36)
-                .addComponent(jToggleButton2)
-                .addContainerGap(183, Short.MAX_VALUE))
-        );
-
-        profileTab.addTab("Profile", jPanel1);
-
-        jToggleButton3.setText("jToggleButton3");
-
-        jToggleButton4.setText("jToggleButton4");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(310, 310, 310)
-                        .addComponent(jToggleButton3))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(327, 327, 327)
-                        .addComponent(jToggleButton4)))
-                .addContainerGap(393, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(211, Short.MAX_VALUE)
-                .addComponent(jToggleButton3)
-                .addGap(58, 58, 58)
-                .addComponent(jToggleButton4)
-                .addGap(117, 117, 117))
+        profileTabLayout.setVerticalGroup(
+            profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profileTabLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(idLabel)
+                .addGap(31, 31, 31)
+                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(staffBtn)
+                    .addComponent(adminBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
+                .addComponent(logoutBtn)
+                .addGap(25, 25, 25))
         );
 
-        profileTab.addTab("Book", jPanel2);
+        home.addTab("Profile", profileTab);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout bookTabLayout = new javax.swing.GroupLayout(bookTab);
+        bookTab.setLayout(bookTabLayout);
+        bookTabLayout.setHorizontalGroup(
+            bookTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 825, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        bookTabLayout.setVerticalGroup(
+            bookTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 432, Short.MAX_VALUE)
         );
 
-        profileTab.addTab("Bill", jPanel3);
+        home.addTab("Book", bookTab);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout billTabLayout = new javax.swing.GroupLayout(billTab);
+        billTab.setLayout(billTabLayout);
+        billTabLayout.setHorizontalGroup(
+            billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 825, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        billTabLayout.setVerticalGroup(
+            billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 432, Short.MAX_VALUE)
         );
 
-        profileTab.addTab("Report", jPanel4);
+        home.addTab("Bill", billTab);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout reportTabLayout = new javax.swing.GroupLayout(reportTab);
+        reportTab.setLayout(reportTabLayout);
+        reportTabLayout.setHorizontalGroup(
+            reportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 825, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        reportTabLayout.setVerticalGroup(
+            reportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 432, Short.MAX_VALUE)
         );
 
-        profileTab.addTab("Admin", jPanel5);
+        home.addTab("Report", reportTab);
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout adminTabLayout = new javax.swing.GroupLayout(adminTab);
+        adminTab.setLayout(adminTabLayout);
+        adminTabLayout.setHorizontalGroup(
+            adminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 825, Short.MAX_VALUE)
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        adminTabLayout.setVerticalGroup(
+            adminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 432, Short.MAX_VALUE)
         );
 
-        profileTab.addTab("Staff", jPanel6);
+        home.addTab("Admin", adminTab);
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout staffTabLayout = new javax.swing.GroupLayout(staffTab);
+        staffTab.setLayout(staffTabLayout);
+        staffTabLayout.setHorizontalGroup(
+            staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 825, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        staffTabLayout.setVerticalGroup(
+            staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 432, Short.MAX_VALUE)
         );
 
-        profileTab.addTab("Customer", jPanel7);
+        home.addTab("Staff", staffTab);
+
+        javax.swing.GroupLayout customerTabLayout = new javax.swing.GroupLayout(customerTab);
+        customerTab.setLayout(customerTabLayout);
+        customerTabLayout.setHorizontalGroup(
+            customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 825, Short.MAX_VALUE)
+        );
+        customerTabLayout.setVerticalGroup(
+            customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 432, Short.MAX_VALUE)
+        );
+
+        home.addTab("Customer", customerTab);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(profileTab)
+            .addComponent(home)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(profileTab)
+            .addComponent(home)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        this.dispose();
+        LoginOption.getInstance().setVisible(true);
+    }//GEN-LAST:event_logoutBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,23 +232,23 @@ public class Interface extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Interface().setVisible(true);
+//                new Interface().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
-    private javax.swing.JTabbedPane profileTab;
+    private javax.swing.JButton adminBtn;
+    private javax.swing.JPanel adminTab;
+    private javax.swing.JPanel billTab;
+    private javax.swing.JPanel bookTab;
+    private javax.swing.JPanel customerTab;
+    private javax.swing.JTabbedPane home;
+    private javax.swing.JLabel idLabel;
+    private javax.swing.JButton logoutBtn;
+    private javax.swing.JPanel profileTab;
+    private javax.swing.JPanel reportTab;
+    private javax.swing.JButton staffBtn;
+    private javax.swing.JPanel staffTab;
     // End of variables declaration//GEN-END:variables
 }
