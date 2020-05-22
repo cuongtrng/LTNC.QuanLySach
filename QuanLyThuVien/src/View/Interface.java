@@ -5,8 +5,12 @@
  */
 package View;
 
+import Controller.ProfileController;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -14,24 +18,41 @@ import javax.swing.JFrame;
  * @author admin
  */
 public class Interface extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Interface
-     */
-    public Interface(int id, boolean type) {
+    
+    // id cua nguoi dung
+    int id_user;
+    // loai tai khoan 0 =admin, 1 = staff
+    boolean type;
+    public Interface(int i, boolean t) {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTitle("Home");
-        idLabel.setText("Your id is: " + id);
+        id_user = i;  type = t;
+        reloadProfile();
         if (type){
             adminBtn.setEnabled(false);
-            home.setEnabled(false);
         } else {
             staffBtn.setEnabled(false);
         }
-//        System.out.println("Khoi tao home "+ n);
-//        customerTab.setEnabled(false);
-//        jButton1.setEnabled(false);
+    }
+    
+    private void reloadProfile(){
+        if(!type){
+            try {
+                //admin
+                ProfileController.getAdminInfoById(id_user, idInfo, nameInfo, phoneInfo, emailInfo,
+                        addrInfo, shiftInfo, wdateInfo, hiLabel, addrLabel, shiftLabel, wdateLabel);
+            } catch (SQLException ex) {
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                ProfileController.getStaffInfoById(id_user, idInfo, nameInfo, phoneInfo, emailInfo, 
+                        addrInfo, shiftInfo, wdateInfo, hiLabel);
+            } catch (SQLException ex) {
+                Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
     /**
@@ -49,6 +70,20 @@ public class Interface extends javax.swing.JFrame {
         staffBtn = new javax.swing.JButton();
         adminBtn = new javax.swing.JButton();
         idLabel = new javax.swing.JLabel();
+        nameLabel = new javax.swing.JLabel();
+        phoneLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
+        addrLabel = new javax.swing.JLabel();
+        shiftLabel = new javax.swing.JLabel();
+        wdateLabel = new javax.swing.JLabel();
+        hiLabel = new javax.swing.JLabel();
+        idInfo = new javax.swing.JLabel();
+        nameInfo = new javax.swing.JLabel();
+        phoneInfo = new javax.swing.JLabel();
+        emailInfo = new javax.swing.JLabel();
+        addrInfo = new javax.swing.JLabel();
+        shiftInfo = new javax.swing.JLabel();
+        wdateInfo = new javax.swing.JLabel();
         bookTab = new javax.swing.JPanel();
         billTab = new javax.swing.JPanel();
         reportTab = new javax.swing.JPanel();
@@ -70,37 +105,126 @@ public class Interface extends javax.swing.JFrame {
 
         adminBtn.setText("Admin");
 
-        idLabel.setText("Your id is: ");
+        idLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        idLabel.setText("ID:");
+
+        nameLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        nameLabel.setText("Name:");
+
+        phoneLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        phoneLabel.setText("Phone:");
+
+        emailLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        emailLabel.setText("Email:");
+
+        addrLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addrLabel.setText("Address:");
+
+        shiftLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        shiftLabel.setText("Shift count:");
+
+        wdateLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        wdateLabel.setText("Start work date:");
+
+        hiLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        hiLabel.setText("Hello");
+
+        idInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        idInfo.setText("null");
+
+        nameInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        nameInfo.setText("null");
+
+        phoneInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        phoneInfo.setText("null");
+
+        emailInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        emailInfo.setText("null");
+
+        addrInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        addrInfo.setText("null");
+
+        shiftInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        shiftInfo.setText("null");
+
+        wdateInfo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        wdateInfo.setText("null");
 
         javax.swing.GroupLayout profileTabLayout = new javax.swing.GroupLayout(profileTab);
         profileTab.setLayout(profileTabLayout);
         profileTabLayout.setHorizontalGroup(
             profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profileTabLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(hiLabel)
+                .addGap(292, 292, 292))
             .addGroup(profileTabLayout.createSequentialGroup()
-                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(43, 43, 43)
+                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(profileTabLayout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(idLabel)
-                            .addGroup(profileTabLayout.createSequentialGroup()
-                                .addComponent(staffBtn)
-                                .addGap(108, 108, 108)
-                                .addComponent(adminBtn))))
+                            .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameLabel)
+                            .addComponent(phoneLabel)
+                            .addComponent(emailLabel)
+                            .addComponent(addrLabel)
+                            .addComponent(shiftLabel)
+                            .addComponent(wdateLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(idInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameInfo)
+                            .addComponent(phoneInfo)
+                            .addComponent(emailInfo)
+                            .addComponent(addrInfo)
+                            .addComponent(shiftInfo)
+                            .addComponent(wdateInfo)))
                     .addGroup(profileTabLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(449, Short.MAX_VALUE))
+                        .addComponent(staffBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(adminBtn)
+                        .addGap(43, 43, 43)))
+                .addContainerGap(273, Short.MAX_VALUE))
         );
         profileTabLayout.setVerticalGroup(
             profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profileTabLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(idLabel)
-                .addGap(31, 31, 31)
+                .addGap(13, 13, 13)
+                .addComponent(hiLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idLabel)
+                    .addComponent(idInfo))
+                .addGap(18, 18, 18)
+                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameLabel)
+                    .addComponent(nameInfo))
+                .addGap(18, 18, 18)
+                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(phoneLabel)
+                    .addComponent(phoneInfo))
+                .addGap(18, 18, 18)
+                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emailLabel)
+                    .addComponent(emailInfo))
+                .addGap(18, 18, 18)
+                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addrLabel)
+                    .addComponent(addrInfo))
+                .addGap(18, 18, 18)
+                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(shiftLabel)
+                    .addComponent(shiftInfo))
+                .addGap(18, 18, 18)
+                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(wdateLabel)
+                    .addComponent(wdateInfo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(staffBtn)
                     .addComponent(adminBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -111,11 +235,11 @@ public class Interface extends javax.swing.JFrame {
         bookTab.setLayout(bookTabLayout);
         bookTabLayout.setHorizontalGroup(
             bookTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 825, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
         );
         bookTabLayout.setVerticalGroup(
             bookTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+            .addGap(0, 405, Short.MAX_VALUE)
         );
 
         home.addTab("Book", bookTab);
@@ -124,11 +248,11 @@ public class Interface extends javax.swing.JFrame {
         billTab.setLayout(billTabLayout);
         billTabLayout.setHorizontalGroup(
             billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 825, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
         );
         billTabLayout.setVerticalGroup(
             billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+            .addGap(0, 405, Short.MAX_VALUE)
         );
 
         home.addTab("Bill", billTab);
@@ -137,11 +261,11 @@ public class Interface extends javax.swing.JFrame {
         reportTab.setLayout(reportTabLayout);
         reportTabLayout.setHorizontalGroup(
             reportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 825, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
         );
         reportTabLayout.setVerticalGroup(
             reportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+            .addGap(0, 405, Short.MAX_VALUE)
         );
 
         home.addTab("Report", reportTab);
@@ -150,11 +274,11 @@ public class Interface extends javax.swing.JFrame {
         adminTab.setLayout(adminTabLayout);
         adminTabLayout.setHorizontalGroup(
             adminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 825, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
         );
         adminTabLayout.setVerticalGroup(
             adminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+            .addGap(0, 405, Short.MAX_VALUE)
         );
 
         home.addTab("Admin", adminTab);
@@ -163,11 +287,11 @@ public class Interface extends javax.swing.JFrame {
         staffTab.setLayout(staffTabLayout);
         staffTabLayout.setHorizontalGroup(
             staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 825, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
         );
         staffTabLayout.setVerticalGroup(
             staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+            .addGap(0, 405, Short.MAX_VALUE)
         );
 
         home.addTab("Staff", staffTab);
@@ -176,11 +300,11 @@ public class Interface extends javax.swing.JFrame {
         customerTab.setLayout(customerTabLayout);
         customerTabLayout.setHorizontalGroup(
             customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 825, Short.MAX_VALUE)
+            .addGap(0, 590, Short.MAX_VALUE)
         );
         customerTabLayout.setVerticalGroup(
             customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+            .addGap(0, 405, Short.MAX_VALUE)
         );
 
         home.addTab("Customer", customerTab);
@@ -193,7 +317,7 @@ public class Interface extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home)
+            .addComponent(home, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -240,17 +364,31 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addrInfo;
+    private javax.swing.JLabel addrLabel;
     private javax.swing.JButton adminBtn;
     private javax.swing.JPanel adminTab;
     private javax.swing.JPanel billTab;
     private javax.swing.JPanel bookTab;
     private javax.swing.JPanel customerTab;
+    private javax.swing.JLabel emailInfo;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JLabel hiLabel;
     private javax.swing.JTabbedPane home;
+    private javax.swing.JLabel idInfo;
     private javax.swing.JLabel idLabel;
     private javax.swing.JButton logoutBtn;
+    private javax.swing.JLabel nameInfo;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel phoneInfo;
+    private javax.swing.JLabel phoneLabel;
     private javax.swing.JPanel profileTab;
     private javax.swing.JPanel reportTab;
+    private javax.swing.JLabel shiftInfo;
+    private javax.swing.JLabel shiftLabel;
     private javax.swing.JButton staffBtn;
     private javax.swing.JPanel staffTab;
+    private javax.swing.JLabel wdateInfo;
+    private javax.swing.JLabel wdateLabel;
     // End of variables declaration//GEN-END:variables
 }
