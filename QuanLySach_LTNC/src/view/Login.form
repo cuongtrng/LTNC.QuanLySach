@@ -105,14 +105,17 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="usernameField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ngan"/>
+      </Properties>
       <Events>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="usernameFieldKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="passwordField">
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="passwordFieldKeyPressed"/>
-      </Events>
+      <Properties>
+        <Property name="text" type="java.lang.String" value="1234"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="loginbtn">
       <Properties>

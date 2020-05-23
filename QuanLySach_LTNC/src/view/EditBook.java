@@ -9,6 +9,7 @@ import Controller.SearchController;
 import controller.AddBookController;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Book;
@@ -28,7 +29,7 @@ public class EditBook extends javax.swing.JFrame {
         initComponents();
         list= new ArrayList<>();
         model= (DefaultTableModel) jTable1.getModel();
-       
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             
     }
 
@@ -58,7 +59,6 @@ public class EditBook extends javax.swing.JFrame {
         txtpublishyear = new javax.swing.JTextField();
         txtamount = new javax.swing.JTextField();
         txtprice = new javax.swing.JTextField();
-        btnEdit = new javax.swing.JButton();
         btnsave = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -130,13 +130,6 @@ public class EditBook extends javax.swing.JFrame {
             }
         });
 
-        btnEdit.setText("Cancel");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
-            }
-        });
-
         btnsave.setText("Save");
         btnsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,8 +196,7 @@ public class EditBook extends javax.swing.JFrame {
                                     .addComponent(txtpublishyear))
                                 .addGap(32, 32, 32))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnEdit)
-                                .addGap(18, 18, 18)
+                                .addGap(83, 83, 83)
                                 .addComponent(btndelete)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                                 .addComponent(btnsave, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,7 +243,6 @@ public class EditBook extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnsave)
-                            .addComponent(btnEdit)
                             .addComponent(btndelete))
                         .addGap(48, 48, 48))
                     .addGroup(layout.createSequentialGroup()
@@ -270,7 +261,7 @@ public class EditBook extends javax.swing.JFrame {
 
     private void btnScategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScategoryActionPerformed
         model.setRowCount(0);
-        search("Cateory_id");
+        search("Category_id");
     }//GEN-LAST:event_btnScategoryActionPerformed
 
     private void txtcategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcategoryActionPerformed
@@ -323,10 +314,6 @@ public class EditBook extends javax.swing.JFrame {
         model.setRowCount(0);
         search("PublishYear");
     }//GEN-LAST:event_btnSpublishyearActionPerformed
-
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        showRow();
-    }//GEN-LAST:event_btnEditActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         
@@ -382,7 +369,6 @@ public class EditBook extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntSname;
-    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSauthor;
     private javax.swing.JButton btnScategory;
     private javax.swing.JButton btnSpublishyear;
