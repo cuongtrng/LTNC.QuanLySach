@@ -125,7 +125,7 @@ public class AddCustomer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        CustomerController.AddCustomer(nameField, phoneField, emailField, addrField, membershipField);
+        CustomerController.addCustomer(nameField, phoneField, emailField, addrField, membershipField);
     }//GEN-LAST:event_addBtnActionPerformed
 
     /**

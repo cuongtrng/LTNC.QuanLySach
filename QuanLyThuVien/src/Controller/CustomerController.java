@@ -14,12 +14,16 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import model.dBConnect;
 
 /**
@@ -28,7 +32,7 @@ import model.dBConnect;
  */
 public class CustomerController {
     
-    public static void AddCustomer(JTextField name, JTextField phone,JTextField email,JTextField address,
+    public static void addCustomer(JTextField name, JTextField phone,JTextField email,JTextField address,
              JTextField memship){
         if(name.getText().isEmpty())
         {
@@ -104,4 +108,68 @@ public class CustomerController {
         }
     }
     
+    public static void displayAllCustomer(JTable table){
+        try {
+            Statement sta = dBConnect.getConnect().createStatement();
+            ResultSet rs = sta.executeQuery("SELECT * FROM customer");
+            Vector data= null;
+            String header[] = {"ID", "Customer name", "Phone"};
+            DefaultTableModel tblmodel = new DefaultTableModel(header, 0);
+            tblmodel.setRowCount(0);
+            while (rs.next()){
+                data = new Vector();
+                data.add(rs.getInt(1));
+                data.add(rs.getString(2));
+                data.add(rs.getString(3));
+//                data.add(rs.getInt(4));
+                tblmodel.addRow(data);
+            }
+            table.setModel(tblmodel);
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            dBConnect.close();
+        }
+    }
+    
+    public static void getCustomerByID(int id, JLabel idf, JTextField name, JTextField phone,
+            JTextField email,JTextField address, JLabel rdate, JLabel edate ,JTextField memship){
+        try {
+            Statement sta = dBConnect.getConnect().createStatement();
+            ResultSet rs = sta.executeQuery("SELECT * FROM customer WHERE id = '" + id + "'");
+            if(rs.next()){
+                idf.setText(""+id);
+                name.setText(rs.getString("Name"));
+                phone.setText(rs.getString("Phone"));
+                email.setText(rs.getString("Email"));
+                address.setText(rs.getString("Address"));
+                rdate.setText(rs.getString("Registerdate"));
+                edate.setText(rs.getString("Expireddate"));
+                memship.setText(rs.getString("Membership"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void removeCustomer(int id){
+        int ret = JOptionPane.showConfirmDialog(null, "Do you want to delete?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if(ret == JOptionPane.NO_OPTION){
+            return;
+        } else {
+            try {
+                Statement sta = dBConnect.getConnect().createStatement();
+                ret = sta.executeUpdate("DELETE FROM customer WHERE id = '" + id + "'");
+                if (ret > 0){
+                    JOptionPane.showMessageDialog(null, "Remove successfully");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Remove fail");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                dBConnect.close();
+            }
+        }
+    }
 }
