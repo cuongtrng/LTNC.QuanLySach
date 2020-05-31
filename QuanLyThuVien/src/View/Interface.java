@@ -113,6 +113,9 @@ public class Interface extends javax.swing.JFrame {
         crdateField = new javax.swing.JLabel();
         cedateField = new javax.swing.JLabel();
         cidField = new javax.swing.JLabel();
+        cSearchField = new javax.swing.JTextField();
+        cSearchBox = new javax.swing.JComboBox<>();
+        cSearchBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -377,6 +380,15 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        cSearchBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Phone" }));
+
+        cSearchBtn.setText("Search");
+        cSearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cSearchBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout customerTabLayout = new javax.swing.GroupLayout(customerTab);
         customerTab.setLayout(customerTabLayout);
         customerTabLayout.setHorizontalGroup(
@@ -386,8 +398,16 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
                     .addGroup(customerTabLayout.createSequentialGroup()
-                        .addComponent(displayaBtn)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(customerTabLayout.createSequentialGroup()
+                                .addComponent(displayaBtn)
+                                .addGap(35, 35, 35)
+                                .addComponent(cSearchBtn))
+                            .addGroup(customerTabLayout.createSequentialGroup()
+                                .addComponent(cSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cSearchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 125, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerTabLayout.createSequentialGroup()
@@ -423,12 +443,8 @@ public class Interface extends javax.swing.JFrame {
         customerTabLayout.setVerticalGroup(
             customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(customerTabLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(36, 36, 36)
                 .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(customerTabLayout.createSequentialGroup()
-                        .addComponent(displayaBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(customerTabLayout.createSequentialGroup()
                         .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cidLabel)
@@ -465,7 +481,17 @@ public class Interface extends javax.swing.JFrame {
                         .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cremoveBtn)
                             .addComponent(cupdateBtn)
-                            .addComponent(ccreateBtn))))
+                            .addComponent(ccreateBtn)))
+                    .addGroup(customerTabLayout.createSequentialGroup()
+                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cSearchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(displayaBtn)
+                            .addComponent(cSearchBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -541,6 +567,12 @@ public class Interface extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cupdateBtnActionPerformed
 
+    private void cSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cSearchBtnActionPerformed
+        String a =(String) cSearchBox.getSelectedItem();
+        String b = cSearchField.getText();
+        CustomerController.searchCustomer(a, b, customerTable);
+    }//GEN-LAST:event_cSearchBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -582,6 +614,9 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JPanel adminTab;
     private javax.swing.JPanel billTab;
     private javax.swing.JPanel bookTab;
+    private javax.swing.JComboBox<String> cSearchBox;
+    private javax.swing.JButton cSearchBtn;
+    private javax.swing.JTextField cSearchField;
     private javax.swing.JTextField caddrField;
     private javax.swing.JLabel caddrLabel;
     private javax.swing.JButton ccreateBtn;

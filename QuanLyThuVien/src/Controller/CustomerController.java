@@ -113,7 +113,7 @@ public class CustomerController {
             Statement sta = dBConnect.getConnect().createStatement();
             ResultSet rs = sta.executeQuery("SELECT * FROM customer");
             Vector data= null;
-            String header[] = {"ID", "Customer name", "Phone"};
+            String header[] = {"ID", "Customer Name", "Phone"};
             DefaultTableModel tblmodel = new DefaultTableModel(header, 0);
             tblmodel.setRowCount(0);
             while (rs.next()){
@@ -197,6 +197,29 @@ public class CustomerController {
             }
             
             ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            dBConnect.close();
+        }
+    }
+    
+    public static void searchCustomer(String type, String item, JTable table){
+        try {
+            Statement sta = dBConnect.getConnect().createStatement();
+            ResultSet rs = sta.executeQuery("SELECT * FROM customer WHERE " + type + " = '" + item + "'");
+            Vector data= null;
+            String header[] = {"ID", "Customer Name", "Phone"};
+            DefaultTableModel tblmodel = new DefaultTableModel(header, 0);
+            tblmodel.setRowCount(0);
+            while (rs.next()){
+                data = new Vector();
+                data.add(rs.getInt(1));
+                data.add(rs.getString(2));
+                data.add(rs.getString(3));
+                tblmodel.addRow(data);
+            }
+            table.setModel(tblmodel);
         } catch (SQLException ex) {
             Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
