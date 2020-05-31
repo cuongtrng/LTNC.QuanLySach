@@ -172,4 +172,35 @@ public class CustomerController {
             }
         }
     }
+    
+    public static void updateCustomer(JLabel idf, JTextField name, JTextField phone,
+            JTextField email,JTextField address, JLabel rdate, JLabel edate ,JTextField memship){       
+        try {
+            String sql = "UPDATE customer SET Name = ?,Phone=?,Email=?,Address=?,Registerdate=?,"
+                    + "Expireddate=?,Membership=? WHERE id = ?";
+            PreparedStatement ps = dBConnect.getConnect().prepareStatement(sql);
+            
+            ps.setString(1, name.getText());
+            ps.setString(2, phone.getText());
+            ps.setString(3, email.getText());
+            ps.setString(4, address.getText());
+            ps.setString(5, rdate.getText());
+            ps.setString(6, edate.getText());
+            ps.setInt(7, Integer.parseInt(memship.getText()));
+            ps.setInt(8, Integer.parseInt(idf.getText()));
+            
+            int ret = ps.executeUpdate();
+            if(ret>0){
+                JOptionPane.showMessageDialog(null, "Updating successfully");
+            } else {
+                JOptionPane.showMessageDialog(null, "Updating fail");
+            }
+            
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            dBConnect.close();
+        }
+    }
 }

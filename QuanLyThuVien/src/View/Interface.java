@@ -342,6 +342,11 @@ public class Interface extends javax.swing.JFrame {
         });
 
         cupdateBtn.setText("Update");
+        cupdateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cupdateBtnActionPerformed(evt);
+            }
+        });
 
         cremoveBtn.setText("Remove");
         cremoveBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -352,10 +357,7 @@ public class Interface extends javax.swing.JFrame {
 
         customerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Customer Name", "Phone"
@@ -527,6 +529,17 @@ public class Interface extends javax.swing.JFrame {
             cmembershipField.setText(null);
         }  
     }//GEN-LAST:event_cremoveBtnActionPerformed
+
+    private void cupdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cupdateBtnActionPerformed
+        if (cidField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please choose a customer from customer table");
+        } else {
+            CustomerController.updateCustomer(cidField, cnameField, cphoneField, cmailField, caddrField,
+                crdateField, cedateField, cmembershipField);
+            //Load lai toan bo bang
+            CustomerController.displayAllCustomer(customerTable);
+        }
+    }//GEN-LAST:event_cupdateBtnActionPerformed
 
     /**
      * @param args the command line arguments
