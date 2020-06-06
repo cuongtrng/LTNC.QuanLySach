@@ -15,7 +15,8 @@ CREATE TABLE `admin` (
   `Phone` char(11) DEFAULT NULL,
   `Email` varchar(120) DEFAULT NULL,
   `UserName` varchar(100) NOT NULL,
-  `Password` varchar(100) NOT NULL
+  `Password` varchar(100) NOT NULL,
+  `Image` blob default null
 );
 
 --
@@ -40,7 +41,8 @@ CREATE TABLE `staff` (
   `Shift_count` int(10) DEFAULT 0,
   `Start_work_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `UserName` varchar(100) NOT NULL UNIQUE,
-  `Password` varchar(100) NOT NULL
+  `Password` varchar(100) NOT NULL,
+  `Image` blob default null
 );
 
 --
@@ -62,7 +64,9 @@ CREATE TABLE `book` (
   `Author` varchar(150) DEFAULT NULL,
   `PublishYear` int(11) null default null,
   `Amount` int(11) DEFAULT NULL,
-  `Price` int(11) DEFAULT NULL
+  `Price` int(11) DEFAULT NULL,
+  `Brief`  varchar(255) default null,
+  `Image` blob default null
 );
 INSERT INTO `book` (`id`, `Name`, `Category_id`, `Author`, `PublishYear`,`Amount`,`Price`) VALUES
 (1, 'Harry Potter and the Philosopher Stone', 'cartoon', 'J. K. Rowling', 2001,'14', '15'),
@@ -96,7 +100,8 @@ CREATE TABLE `customer` (
   `Address` varchar(120) DEFAULT NULL,
   `Registerdate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `Expireddate` timestamp NULL DEFAULT NULL,
-  `Membership`  boolean not null default 0
+  `Membership`  boolean not null default 0,
+  `image` blob default null
 );
 
 --
