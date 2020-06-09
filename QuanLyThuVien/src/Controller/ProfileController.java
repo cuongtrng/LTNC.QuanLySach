@@ -26,7 +26,6 @@ public class ProfileController {
         if(rs.next()){
             String sname = rs.getString("Name");
             if(!(sname == null)){
-                System.out.println(sname);
                 name.setText(sname);
             }
             
