@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.sql.Blob;
 import java.sql.Timestamp;
 
 /**
@@ -21,6 +22,7 @@ public class Staff {
     private Timestamp start_work_date;
     private String username;
     private String password;
+    private Blob image;
 
     public int getId() {
         return id;
@@ -28,6 +30,14 @@ public class Staff {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Blob getImage() {
+        return image;
+    }
+
+    public void setImage(Blob image) {
+        this.image = image;
     }
 
     public String getName() {
@@ -94,7 +104,7 @@ public class Staff {
         this.password = password;
     }
     public Staff(int sid, String sname, String sphone, String semail, String saddress, int count, Timestamp date,
-            String user, String pass)
+            String user, String pass, Blob simage)
     {
         id = sid;
         name = sname;
@@ -105,6 +115,7 @@ public class Staff {
         start_work_date = date;
         username = user;
         password = pass;
+        image = simage;
     }
     public Staff()
     {
@@ -117,5 +128,6 @@ public class Staff {
         start_work_date = null;
         username = null;
         password = null;
+        image = null;
     }
 }

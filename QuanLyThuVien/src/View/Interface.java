@@ -7,6 +7,8 @@ package View;
 
 import Controller.CustomerController;
 import Controller.ProfileController;
+import Controller.StaffController;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.SQLException;
@@ -25,6 +27,7 @@ public class Interface extends javax.swing.JFrame {
     int id_user;
     // loai tai khoan 0 =admin, 1 = staff
     boolean type;
+    private String ImagePath;
     public Interface(int i, boolean t) {
         initComponents();
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -37,7 +40,7 @@ public class Interface extends javax.swing.JFrame {
 //            staffBtn.setEnabled(false);
         }
     }
-    
+    StaffController stf = new StaffController();
     private void reloadProfile(){
         if(!type){
             try {
@@ -89,7 +92,6 @@ public class Interface extends javax.swing.JFrame {
         billTab = new javax.swing.JPanel();
         reportTab = new javax.swing.JPanel();
         adminTab = new javax.swing.JPanel();
-        staffTab = new javax.swing.JPanel();
         customerTab = new javax.swing.JPanel();
         cidLabel = new javax.swing.JLabel();
         cnameLabel = new javax.swing.JLabel();
@@ -116,6 +118,36 @@ public class Interface extends javax.swing.JFrame {
         cSearchField = new javax.swing.JTextField();
         cSearchBox = new javax.swing.JComboBox<>();
         cSearchBtn = new javax.swing.JButton();
+        staffTab = new javax.swing.JPanel();
+        txtsearch_staff = new javax.swing.JTextField();
+        ComboBox_search_staff = new javax.swing.JComboBox<>();
+        display_all_staff = new javax.swing.JButton();
+        search_staff = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Table_Staff = new javax.swing.JTable();
+        image_staff = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        id_staff = new javax.swing.JLabel();
+        txtusername_staff = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtpassword_staff = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtname_staff = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtphone_staff = new javax.swing.JTextField();
+        txtemail_staff = new javax.swing.JTextField();
+        txtaddress_staff = new javax.swing.JTextField();
+        txtshift_count_staff = new javax.swing.JTextField();
+        txtstartworkdate_staff = new javax.swing.JTextField();
+        Button_Add_Staff = new javax.swing.JButton();
+        Button_Update_staff = new javax.swing.JButton();
+        Button_Delete_staff = new javax.swing.JButton();
+        Button_Refresh_Staff1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -212,7 +244,7 @@ public class Interface extends javax.swing.JFrame {
                     .addGroup(profileTabLayout.createSequentialGroup()
                         .addComponent(refreshBtn)
                         .addGap(122, 122, 122)))
-                .addContainerGap(399, Short.MAX_VALUE))
+                .addContainerGap(494, Short.MAX_VALUE))
         );
         profileTabLayout.setVerticalGroup(
             profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,7 +281,7 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(wdateInfo))
                 .addGap(48, 48, 48)
                 .addComponent(refreshBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -260,11 +292,11 @@ public class Interface extends javax.swing.JFrame {
         bookTab.setLayout(bookTabLayout);
         bookTabLayout.setHorizontalGroup(
             bookTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+            .addGap(0, 811, Short.MAX_VALUE)
         );
         bookTabLayout.setVerticalGroup(
             bookTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 521, Short.MAX_VALUE)
         );
 
         home.addTab("Book", bookTab);
@@ -273,11 +305,11 @@ public class Interface extends javax.swing.JFrame {
         billTab.setLayout(billTabLayout);
         billTabLayout.setHorizontalGroup(
             billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+            .addGap(0, 811, Short.MAX_VALUE)
         );
         billTabLayout.setVerticalGroup(
             billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 521, Short.MAX_VALUE)
         );
 
         home.addTab("Bill", billTab);
@@ -286,11 +318,11 @@ public class Interface extends javax.swing.JFrame {
         reportTab.setLayout(reportTabLayout);
         reportTabLayout.setHorizontalGroup(
             reportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+            .addGap(0, 811, Short.MAX_VALUE)
         );
         reportTabLayout.setVerticalGroup(
             reportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 521, Short.MAX_VALUE)
         );
 
         home.addTab("Report", reportTab);
@@ -299,27 +331,14 @@ public class Interface extends javax.swing.JFrame {
         adminTab.setLayout(adminTabLayout);
         adminTabLayout.setHorizontalGroup(
             adminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+            .addGap(0, 811, Short.MAX_VALUE)
         );
         adminTabLayout.setVerticalGroup(
             adminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 521, Short.MAX_VALUE)
         );
 
         home.addTab("Admin", adminTab);
-
-        javax.swing.GroupLayout staffTabLayout = new javax.swing.GroupLayout(staffTab);
-        staffTab.setLayout(staffTabLayout);
-        staffTabLayout.setHorizontalGroup(
-            staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
-        );
-        staffTabLayout.setVerticalGroup(
-            staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
-        );
-
-        home.addTab("Staff", staffTab);
 
         cidLabel.setText("ID:");
 
@@ -381,6 +400,11 @@ public class Interface extends javax.swing.JFrame {
         });
 
         cSearchBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Phone" }));
+        cSearchBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cSearchBoxActionPerformed(evt);
+            }
+        });
 
         cSearchBtn.setText("Search");
         cSearchBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -396,7 +420,7 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                     .addGroup(customerTabLayout.createSequentialGroup()
                         .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(customerTabLayout.createSequentialGroup()
@@ -407,7 +431,7 @@ public class Interface extends javax.swing.JFrame {
                                 .addComponent(cSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(cSearchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 125, Short.MAX_VALUE)))
+                        .addGap(0, 220, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerTabLayout.createSequentialGroup()
@@ -492,10 +516,262 @@ public class Interface extends javax.swing.JFrame {
                             .addComponent(cSearchBtn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         home.addTab("Customer", customerTab);
+
+        staffTab.setBackground(new java.awt.Color(255, 255, 255));
+        staffTab.setToolTipText("");
+
+        ComboBox_search_staff.setBackground(new java.awt.Color(0, 102, 102));
+        ComboBox_search_staff.setForeground(new java.awt.Color(255, 255, 255));
+        ComboBox_search_staff.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name" }));
+
+        display_all_staff.setBackground(new java.awt.Color(255, 102, 51));
+        display_all_staff.setForeground(new java.awt.Color(255, 255, 255));
+        display_all_staff.setText("Display All");
+        display_all_staff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                display_all_staffActionPerformed(evt);
+            }
+        });
+
+        search_staff.setBackground(new java.awt.Color(255, 51, 0));
+        search_staff.setForeground(new java.awt.Color(255, 255, 255));
+        search_staff.setText("Search");
+        search_staff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_staffActionPerformed(evt);
+            }
+        });
+
+        Table_Staff.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Name"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Table_Staff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Table_StaffMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(Table_Staff);
+        if (Table_Staff.getColumnModel().getColumnCount() > 0) {
+            Table_Staff.getColumnModel().getColumn(0).setResizable(false);
+            Table_Staff.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        image_staff.setText("Image");
+        image_staff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                image_staffMouseClicked(evt);
+            }
+        });
+
+        jLabel2.setText("ID");
+
+        jLabel4.setText("Username");
+
+        jLabel5.setText("Password");
+
+        jLabel6.setText("Name");
+
+        jLabel1.setText("Phone");
+
+        jLabel7.setText("Email");
+
+        jLabel8.setText("Address");
+
+        jLabel9.setText("Shift count");
+
+        jLabel10.setText("Start work date");
+
+        Button_Add_Staff.setBackground(new java.awt.Color(255, 51, 0));
+        Button_Add_Staff.setForeground(new java.awt.Color(255, 255, 255));
+        Button_Add_Staff.setText("Create");
+        Button_Add_Staff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_Add_StaffActionPerformed(evt);
+            }
+        });
+
+        Button_Update_staff.setBackground(new java.awt.Color(255, 51, 0));
+        Button_Update_staff.setForeground(new java.awt.Color(255, 255, 255));
+        Button_Update_staff.setText("Update");
+        Button_Update_staff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_Update_staffActionPerformed(evt);
+            }
+        });
+
+        Button_Delete_staff.setBackground(new java.awt.Color(255, 51, 0));
+        Button_Delete_staff.setForeground(new java.awt.Color(255, 255, 255));
+        Button_Delete_staff.setText("Delete");
+        Button_Delete_staff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_Delete_staffActionPerformed(evt);
+            }
+        });
+
+        Button_Refresh_Staff1.setBackground(new java.awt.Color(255, 51, 0));
+        Button_Refresh_Staff1.setForeground(new java.awt.Color(255, 255, 255));
+        Button_Refresh_Staff1.setText("Refresh");
+        Button_Refresh_Staff1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_Refresh_Staff1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout staffTabLayout = new javax.swing.GroupLayout(staffTab);
+        staffTab.setLayout(staffTabLayout);
+        staffTabLayout.setHorizontalGroup(
+            staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(staffTabLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(staffTabLayout.createSequentialGroup()
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(staffTabLayout.createSequentialGroup()
+                                .addComponent(display_all_staff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(116, 116, 116))
+                            .addGroup(staffTabLayout.createSequentialGroup()
+                                .addComponent(txtsearch_staff)
+                                .addGap(34, 34, 34)))
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ComboBox_search_staff, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(search_staff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(126, 126, 126)
+                .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(staffTabLayout.createSequentialGroup()
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(staffTabLayout.createSequentialGroup()
+                                .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtshift_count_staff)
+                                    .addComponent(txtstartworkdate_staff)
+                                    .addComponent(txtaddress_staff)
+                                    .addComponent(txtemail_staff)
+                                    .addComponent(txtphone_staff)
+                                    .addComponent(txtname_staff)))
+                            .addGroup(staffTabLayout.createSequentialGroup()
+                                .addComponent(Button_Add_Staff, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                                .addComponent(Button_Refresh_Staff1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Button_Update_staff, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Button_Delete_staff, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(31, 31, 31))
+                    .addGroup(staffTabLayout.createSequentialGroup()
+                        .addComponent(image_staff, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(id_staff, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtusername_staff, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtpassword_staff, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
+        );
+        staffTabLayout.setVerticalGroup(
+            staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(staffTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(staffTabLayout.createSequentialGroup()
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(staffTabLayout.createSequentialGroup()
+                                .addComponent(image_staff, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE))
+                            .addGroup(staffTabLayout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(id_staff, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtusername_staff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(23, 23, 23)
+                                .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addGroup(staffTabLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(staffTabLayout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addComponent(txtpassword_staff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtname_staff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(20, 20, 20)
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtphone_staff)
+                            .addComponent(jLabel1))
+                        .addGap(24, 24, 24)
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtemail_staff)
+                            .addComponent(jLabel7))
+                        .addGap(18, 18, 18)
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtaddress_staff, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
+                            .addComponent(txtshift_count_staff, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtstartworkdate_staff, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+                        .addGap(35, 35, 35)
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Button_Add_Staff)
+                            .addComponent(Button_Update_staff)
+                            .addComponent(Button_Delete_staff)
+                            .addComponent(Button_Refresh_Staff1))
+                        .addGap(54, 54, 54))
+                    .addGroup(staffTabLayout.createSequentialGroup()
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtsearch_staff)
+                            .addComponent(ComboBox_search_staff))
+                        .addGap(23, 23, 23)
+                        .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(display_all_staff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(search_staff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(9, 9, 9)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(90, 90, 90))))
+        );
+
+        home.addTab("Staff", staffTab);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -505,7 +781,7 @@ public class Interface extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(home, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
         );
 
         pack();
@@ -573,6 +849,51 @@ public class Interface extends javax.swing.JFrame {
         CustomerController.searchCustomer(a, b, customerTable);
     }//GEN-LAST:event_cSearchBtnActionPerformed
 
+    private void display_all_staffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_display_all_staffActionPerformed
+        display_all_staff.setBackground(Color.getHSBColor(94, 100, 220));
+        stf.DisplayAllStaff(Table_Staff);
+    }//GEN-LAST:event_display_all_staffActionPerformed
+
+    private void cSearchBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cSearchBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cSearchBoxActionPerformed
+
+    private void Table_StaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table_StaffMouseClicked
+        
+        stf.getStaffByID(Table_Staff, txtname_staff, txtphone_staff, txtemail_staff, txtaddress_staff, txtshift_count_staff, 
+                txtusername_staff, txtpassword_staff, txtstartworkdate_staff, image_staff, id_staff);
+    }//GEN-LAST:event_Table_StaffMouseClicked
+
+    private void image_staffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_image_staffMouseClicked
+        ImagePath = Controller.StaffController.getImageStaff(image_staff, ImagePath);
+    }//GEN-LAST:event_image_staffMouseClicked
+
+    private void search_staffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_staffActionPerformed
+        stf.SearchStaff(Table_Staff, ComboBox_search_staff, txtsearch_staff);
+    }//GEN-LAST:event_search_staffActionPerformed
+
+    private void Button_Update_staffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Update_staffActionPerformed
+        stf.UpdateStaff(txtname_staff, txtphone_staff, txtemail_staff, txtaddress_staff, txtshift_count_staff, 
+                txtstartworkdate_staff, txtusername_staff, txtpassword_staff, image_staff, id_staff, ImagePath);
+        stf.DisplayAllStaff(Table_Staff);
+    }//GEN-LAST:event_Button_Update_staffActionPerformed
+
+    private void Button_Add_StaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Add_StaffActionPerformed
+        stf.AddStaff(txtname_staff, txtphone_staff, txtemail_staff, txtaddress_staff, txtshift_count_staff, 
+                txtstartworkdate_staff, txtusername_staff, txtpassword_staff, image_staff, ImagePath);
+        stf.DisplayAllStaff(Table_Staff);
+    }//GEN-LAST:event_Button_Add_StaffActionPerformed
+
+    private void Button_Refresh_Staff1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Refresh_Staff1ActionPerformed
+        stf.Refresh(txtname_staff, txtphone_staff, txtemail_staff, txtaddress_staff, txtshift_count_staff, 
+                txtstartworkdate_staff, txtusername_staff, txtpassword_staff, image_staff, id_staff);
+    }//GEN-LAST:event_Button_Refresh_Staff1ActionPerformed
+
+    private void Button_Delete_staffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_Delete_staffActionPerformed
+        stf.DeleteStaff(Table_Staff);
+        stf.DisplayAllStaff(Table_Staff);
+    }//GEN-LAST:event_Button_Delete_staffActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -609,6 +930,12 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Button_Add_Staff;
+    private javax.swing.JButton Button_Delete_staff;
+    private javax.swing.JButton Button_Refresh_Staff1;
+    private javax.swing.JButton Button_Update_staff;
+    private javax.swing.JComboBox<String> ComboBox_search_staff;
+    private javax.swing.JTable Table_Staff;
     private javax.swing.JLabel addrInfo;
     private javax.swing.JLabel addrLabel;
     private javax.swing.JPanel adminTab;
@@ -636,6 +963,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton cupdateBtn;
     private javax.swing.JPanel customerTab;
     private javax.swing.JTable customerTable;
+    private javax.swing.JButton display_all_staff;
     private javax.swing.JButton displayaBtn;
     private javax.swing.JLabel emailInfo;
     private javax.swing.JLabel emailLabel;
@@ -644,7 +972,19 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JTabbedPane home;
     private javax.swing.JLabel idInfo;
     private javax.swing.JLabel idLabel;
+    private javax.swing.JLabel id_staff;
+    private javax.swing.JLabel image_staff;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel membershipLabel;
     private javax.swing.JLabel nameInfo;
@@ -654,9 +994,19 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JPanel profileTab;
     private javax.swing.JButton refreshBtn;
     private javax.swing.JPanel reportTab;
+    private javax.swing.JButton search_staff;
     private javax.swing.JLabel shiftInfo;
     private javax.swing.JLabel shiftLabel;
     private javax.swing.JPanel staffTab;
+    private javax.swing.JTextField txtaddress_staff;
+    private javax.swing.JTextField txtemail_staff;
+    private javax.swing.JTextField txtname_staff;
+    private javax.swing.JTextField txtpassword_staff;
+    private javax.swing.JTextField txtphone_staff;
+    private javax.swing.JTextField txtsearch_staff;
+    private javax.swing.JTextField txtshift_count_staff;
+    private javax.swing.JTextField txtstartworkdate_staff;
+    private javax.swing.JTextField txtusername_staff;
     private javax.swing.JLabel wdateInfo;
     private javax.swing.JLabel wdateLabel;
     // End of variables declaration//GEN-END:variables
