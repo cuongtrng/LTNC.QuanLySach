@@ -57,6 +57,12 @@ public class AddCustomer extends javax.swing.JFrame {
 
         membershipLabel.setText("Membership");
 
+        nameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameFieldActionPerformed(evt);
+            }
+        });
+
         addBtn.setText("Add");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,6 +133,10 @@ public class AddCustomer extends javax.swing.JFrame {
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         CustomerController.addCustomer(nameField, phoneField, emailField, addrField, membershipField);
     }//GEN-LAST:event_addBtnActionPerformed
+
+    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameFieldActionPerformed
 
     /**
      * @param args the command line arguments

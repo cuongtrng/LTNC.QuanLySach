@@ -5,15 +5,26 @@
  */
 package View;
 
+import Controller.BillController;
+import static Controller.BillController.getDate;
 import Controller.CustomerController;
 import Controller.ProfileController;
+import Model.BillDetail;
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static jdk.nashorn.internal.objects.Global.getDate;
 
 /**
  *
@@ -23,13 +34,16 @@ public class Interface extends javax.swing.JFrame {
     
     // id cua nguoi dung
     int id_user;
+    int totalprice=0;
+    
     // loai tai khoan 0 =admin, 1 = staff
     boolean type;
     public Interface(int i, boolean t) {
+        id_user = i;  type = t;
         initComponents();
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTitle("Home");
-        id_user = i;  type = t;
+
         reloadProfile();
         if (type){
 //            adminBtn.setEnabled(false);
@@ -86,7 +100,19 @@ public class Interface extends javax.swing.JFrame {
         wdateInfo = new javax.swing.JLabel();
         refreshBtn = new javax.swing.JButton();
         bookTab = new javax.swing.JPanel();
-        billTab = new javax.swing.JPanel();
+        none = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        StaffId = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        IdBill = new javax.swing.JTextField();
+        CustomerId = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        AddDetailButton = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         reportTab = new javax.swing.JPanel();
         adminTab = new javax.swing.JPanel();
         staffTab = new javax.swing.JPanel();
@@ -212,7 +238,7 @@ public class Interface extends javax.swing.JFrame {
                     .addGroup(profileTabLayout.createSequentialGroup()
                         .addComponent(refreshBtn)
                         .addGap(122, 122, 122)))
-                .addContainerGap(399, Short.MAX_VALUE))
+                .addContainerGap(432, Short.MAX_VALUE))
         );
         profileTabLayout.setVerticalGroup(
             profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,7 +275,7 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(wdateInfo))
                 .addGap(48, 48, 48)
                 .addComponent(refreshBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -260,37 +286,162 @@ public class Interface extends javax.swing.JFrame {
         bookTab.setLayout(bookTabLayout);
         bookTabLayout.setHorizontalGroup(
             bookTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
         bookTabLayout.setVerticalGroup(
             bookTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 495, Short.MAX_VALUE)
         );
 
         home.addTab("Book", bookTab);
 
-        javax.swing.GroupLayout billTabLayout = new javax.swing.GroupLayout(billTab);
-        billTab.setLayout(billTabLayout);
-        billTabLayout.setHorizontalGroup(
-            billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+        jLabel1.setText("IDNumber:");
+
+        StaffId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StaffIdActionPerformed(evt);
+            }
+        });
+        StaffId.setText(""+id_user);
+
+        jLabel2.setText("Staff:");
+
+        jLabel3.setText("CustomerId:");
+
+        IdBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IdBillActionPerformed(evt);
+            }
+        });
+        IdBill.setText(""+(1+BillController.getBillId()));
+
+        CustomerId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CustomerIdActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "BookId", "Amount", "Price"
+            }
+        ));
+        jTable1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTable1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        jButton1.setText("CreateBill");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        AddDetailButton.setText("AddDetail");
+        AddDetailButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddDetailButtonActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("RemoveDetail");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("DisplayBill");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout noneLayout = new javax.swing.GroupLayout(none);
+        none.setLayout(noneLayout);
+        noneLayout.setHorizontalGroup(
+            noneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(noneLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(noneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(noneLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(noneLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(noneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(noneLayout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addGroup(noneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(noneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(StaffId, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(IdBill, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(noneLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(AddDetailButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3))))
+                    .addComponent(jButton4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        billTabLayout.setVerticalGroup(
-            billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+        noneLayout.setVerticalGroup(
+            noneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(noneLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(noneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(CustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(noneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(noneLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(noneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(StaffId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(noneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(IdBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(135, 135, 135)
+                        .addGroup(noneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(AddDetailButton)
+                            .addComponent(jButton3)))
+                    .addGroup(noneLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        home.addTab("Bill", billTab);
+        home.addTab("Bill", none);
 
         javax.swing.GroupLayout reportTabLayout = new javax.swing.GroupLayout(reportTab);
         reportTab.setLayout(reportTabLayout);
         reportTabLayout.setHorizontalGroup(
             reportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
         reportTabLayout.setVerticalGroup(
             reportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 495, Short.MAX_VALUE)
         );
 
         home.addTab("Report", reportTab);
@@ -299,11 +450,11 @@ public class Interface extends javax.swing.JFrame {
         adminTab.setLayout(adminTabLayout);
         adminTabLayout.setHorizontalGroup(
             adminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
         adminTabLayout.setVerticalGroup(
             adminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 495, Short.MAX_VALUE)
         );
 
         home.addTab("Admin", adminTab);
@@ -312,11 +463,11 @@ public class Interface extends javax.swing.JFrame {
         staffTab.setLayout(staffTabLayout);
         staffTabLayout.setHorizontalGroup(
             staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 716, Short.MAX_VALUE)
+            .addGap(0, 749, Short.MAX_VALUE)
         );
         staffTabLayout.setVerticalGroup(
             staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 495, Short.MAX_VALUE)
         );
 
         home.addTab("Staff", staffTab);
@@ -336,6 +487,12 @@ public class Interface extends javax.swing.JFrame {
         expdateLabel.setText("Expired date:");
 
         membershipLabel.setText("Membership:");
+
+        cnameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cnameFieldActionPerformed(evt);
+            }
+        });
 
         ccreateBtn.setText("Create");
         ccreateBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -380,6 +537,12 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        cSearchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cSearchFieldActionPerformed(evt);
+            }
+        });
+
         cSearchBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Phone" }));
 
         cSearchBtn.setText("Search");
@@ -396,7 +559,7 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerTabLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                     .addGroup(customerTabLayout.createSequentialGroup()
                         .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(customerTabLayout.createSequentialGroup()
@@ -407,7 +570,7 @@ public class Interface extends javax.swing.JFrame {
                                 .addComponent(cSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(cSearchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 125, Short.MAX_VALUE)))
+                        .addGap(0, 158, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerTabLayout.createSequentialGroup()
@@ -492,7 +655,7 @@ public class Interface extends javax.swing.JFrame {
                             .addComponent(cSearchBtn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         home.addTab("Customer", customerTab);
@@ -501,7 +664,10 @@ public class Interface extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(home)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -573,6 +739,89 @@ public class Interface extends javax.swing.JFrame {
         CustomerController.searchCustomer(a, b, customerTable);
     }//GEN-LAST:event_cSearchBtnActionPerformed
 
+    private void cnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cnameFieldActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        new DisplayBill().setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        int[] rows = jTable1.getSelectedRows();
+        for(int i=0;i<rows.length;i++){
+            model.removeRow(rows[i]-i);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void AddDetailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddDetailButtonActionPerformed
+        // TODO add your handling code here:
+        AddBillDetail a = new AddBillDetail();
+        a.setVisible(true);
+        a.addWindowListener(new java.awt.event.WindowAdapter(){
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                String bookid = a.getbookid();
+                String amount = a.getamount();
+                String price = BillController.getPrice(bookid);
+                if(price == null){
+                JOptionPane.showMessageDialog(null, "invalid bookid");
+                }
+                else{
+                DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
+                m.addRow(new Object[] {bookid,amount,Integer.parseInt(amount)*Integer.parseInt(price)});                
+                
+                totalprice = totalprice + Integer.parseInt(amount)*Integer.parseInt(price);
+                
+                System.out.println(totalprice);
+//                System.out.println(a.getamount());
+                }
+                
+                a.setVisible(false);
+            }
+            
+        });
+    }//GEN-LAST:event_AddDetailButtonActionPerformed
+    
+    
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        BillController.addBill(CustomerId,StaffId.getText(),totalprice);
+        new PrintBill().setVisible(true); 
+        totalprice=0;
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.setRowCount(0);
+        IdBill.setText(""+(1+BillController.getBillId()));
+        
+
+               
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTable1AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1AncestorAdded
+
+    private void IdBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdBillActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_IdBillActionPerformed
+
+    private void StaffIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StaffIdActionPerformed
+
+    private void CustomerIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerIdActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_CustomerIdActionPerformed
+
+    private void cSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cSearchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cSearchFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -609,10 +858,13 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddDetailButton;
+    private javax.swing.JTextField CustomerId;
+    private javax.swing.JTextField IdBill;
+    private javax.swing.JTextField StaffId;
     private javax.swing.JLabel addrInfo;
     private javax.swing.JLabel addrLabel;
     private javax.swing.JPanel adminTab;
-    private javax.swing.JPanel billTab;
     private javax.swing.JPanel bookTab;
     private javax.swing.JComboBox<String> cSearchBox;
     private javax.swing.JButton cSearchBtn;
@@ -644,11 +896,20 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JTabbedPane home;
     private javax.swing.JLabel idInfo;
     private javax.swing.JLabel idLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel membershipLabel;
     private javax.swing.JLabel nameInfo;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JPanel none;
     private javax.swing.JLabel phoneInfo;
     private javax.swing.JLabel phoneLabel;
     private javax.swing.JPanel profileTab;
@@ -660,4 +921,6 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel wdateInfo;
     private javax.swing.JLabel wdateLabel;
     // End of variables declaration//GEN-END:variables
+
+   
 }

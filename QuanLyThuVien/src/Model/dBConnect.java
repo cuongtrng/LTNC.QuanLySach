@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public class dBConnect {
     private static String db_url = "jdbc:mysql://localhost/library1?serverTimezone=UTC";
     private static String user_name = "root";
-    private static String password = "12345";
+    private static String password = "pewdiepie1998";
     private static String className = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static Connection conn = null;
     

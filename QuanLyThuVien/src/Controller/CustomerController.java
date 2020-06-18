@@ -111,9 +111,8 @@ public class CustomerController {
     public static void displayAllCustomer(JTable table){
         try {
             Statement sta = dBConnect.getConnect().createStatement();
-            ResultSet rs = sta.executeQuery("SELECT * FROM customer");
-            Vector data= null;
-            String header[] = {"ID", "Customer Name", "Phone"};
+            ResultSet rs = sta.executeQuery("SELECT * FROM bill");
+            Vector data= null;            String header[] = {"ID", "Customer Name", "Phone"};
             DefaultTableModel tblmodel = new DefaultTableModel(header, 0);
             tblmodel.setRowCount(0);
             while (rs.next()){
