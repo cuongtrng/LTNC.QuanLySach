@@ -6,6 +6,13 @@
 package Controller;
 
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +25,9 @@ import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -33,7 +43,7 @@ import model.dBConnect;
 public class CustomerController {
     
     public static void addCustomer(JTextField name, JTextField phone,JTextField email,JTextField address,
-             JTextField memship){
+             JTextField memship, JLabel imagePath){
         if(name.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(null, "Please input Name");
@@ -71,8 +81,8 @@ public class CustomerController {
             return; 
         }
         
-        String insert = "INSERT INTO customer (Name,Phone,Email,Address,Registerdate,Expireddate,Membership) "
-                + "values(?,?,?,?,?,?,?)";
+        String insert = "INSERT INTO customer (Name,Phone,Email,Address,Registerdate,Expireddate,Membership,Image) "
+                + "values(?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = dBConnect.getConnect().prepareStatement(insert,Statement.RETURN_GENERATED_KEYS);
             
@@ -84,6 +94,17 @@ public class CustomerController {
             Date d=new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(30));
             ps.setTimestamp(6, new Timestamp(d.getTime()));
             ps.setInt(7,Integer.parseInt(memship.getText()));
+            // Input anh
+            String s=imagePath.getText();
+            if(s!=null){
+                FileInputStream fis = null;
+                try {
+                    fis = new FileInputStream(new File(s));
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ps.setBinaryStream(8, fis);
+            }
             
             ResultSet rs = ps.getGeneratedKeys();
             ret = ps.executeUpdate();
@@ -104,6 +125,7 @@ public class CustomerController {
             email.setText(null);
             address.setText(null);
             memship.setText(null);
+            imagePath.setText(null);
             dBConnect.close();
         }
     }
@@ -133,7 +155,7 @@ public class CustomerController {
     }
     
     public static void getCustomerByID(int id, JLabel idf, JTextField name, JTextField phone,
-            JTextField email,JTextField address, JLabel rdate, JLabel edate ,JTextField memship){
+            JTextField email,JTextField address, JLabel rdate, JLabel edate ,JTextField memship, JLabel image){
         try {
             Statement sta = dBConnect.getConnect().createStatement();
             ResultSet rs = sta.executeQuery("SELECT * FROM customer WHERE id = '" + id + "'");
@@ -146,6 +168,19 @@ public class CustomerController {
                 rdate.setText(rs.getString("Registerdate"));
                 edate.setText(rs.getString("Expireddate"));
                 memship.setText(rs.getString("Membership"));
+                
+                InputStream is = rs.getBinaryStream("Image");
+                if (is != null){
+                try {
+                    BufferedImage im = ImageIO.read(is);
+                    Image imgs = im.getScaledInstance(image.getWidth(), image.getHeight(),Image.SCALE_SMOOTH);
+                    image.setIcon(new ImageIcon(imgs));
+                } catch (IOException ex) {
+                    Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                    image.setIcon(null);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
@@ -226,4 +261,48 @@ public class CustomerController {
             dBConnect.close();
         }
     }
+    
+        public static void updateImageCustomer(JLabel id, JLabel image){
+        JFileChooser fc=new JFileChooser();
+        fc.showOpenDialog(null);
+        if(fc.getSelectedFile()!=null)
+        {
+            try {
+                String sql = "UPDATE customer SET Image = ? WHERE id = ?";
+                PreparedStatement ps = dBConnect.getConnect().prepareStatement(sql);
+                
+                String s=fc.getSelectedFile().getAbsolutePath();
+                FileInputStream fis = null;
+                try {
+                    fis = new FileInputStream(new File(s));
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ps.setBinaryStream(1, fis);
+                ps.setInt(2, Integer.parseInt(id.getText()));
+                
+                int ret = ps.executeUpdate();
+                if(ret>0){
+                    JOptionPane.showMessageDialog(null, "Updating successfully");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Updating fail");
+                }
+                
+                ps.close();
+                // Ket thuc viec cap nhat vao database
+                // Thay doi hinh anh
+                BufferedImage img = null;
+                try {
+                    img = ImageIO.read(new File(s));
+                } catch (IOException ex) {
+                    Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Image imgs = img.getScaledInstance(image.getWidth(), image.getHeight(),Image.SCALE_SMOOTH);
+                image.setIcon(new ImageIcon(imgs));
+            } catch (SQLException ex) {
+                Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }
+

@@ -46,14 +46,14 @@ public class Interface extends javax.swing.JFrame {
             try {
                 //admin
                 ProfileController.getAdminInfoById(id_user, idInfo, nameInfo, phoneInfo, emailInfo,
-                        addrInfo, shiftInfo, wdateInfo, hiLabel, addrLabel, shiftLabel, wdateLabel);
+                        addrInfo, shiftInfo, wdateInfo, hiLabel, addrLabel, shiftLabel, wdateLabel, imageProfile);
             } catch (SQLException ex) {
                 Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             try {
                 ProfileController.getStaffInfoById(id_user, idInfo, nameInfo, phoneInfo, emailInfo, 
-                        addrInfo, shiftInfo, wdateInfo, hiLabel);
+                        addrInfo, shiftInfo, wdateInfo, hiLabel, imageProfile);
             } catch (SQLException ex) {
                 Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -88,36 +88,11 @@ public class Interface extends javax.swing.JFrame {
         shiftInfo = new javax.swing.JLabel();
         wdateInfo = new javax.swing.JLabel();
         refreshBtn = new javax.swing.JButton();
+        imageProfile = new javax.swing.JLabel();
         bookTab = new javax.swing.JPanel();
         billTab = new javax.swing.JPanel();
         reportTab = new javax.swing.JPanel();
         adminTab = new javax.swing.JPanel();
-        customerTab = new javax.swing.JPanel();
-        cidLabel = new javax.swing.JLabel();
-        cnameLabel = new javax.swing.JLabel();
-        cphoneLabel = new javax.swing.JLabel();
-        cmailLabel = new javax.swing.JLabel();
-        caddrLabel = new javax.swing.JLabel();
-        cregdateLabel = new javax.swing.JLabel();
-        expdateLabel = new javax.swing.JLabel();
-        membershipLabel = new javax.swing.JLabel();
-        cnameField = new javax.swing.JTextField();
-        cphoneField = new javax.swing.JTextField();
-        cmailField = new javax.swing.JTextField();
-        caddrField = new javax.swing.JTextField();
-        cmembershipField = new javax.swing.JTextField();
-        ccreateBtn = new javax.swing.JButton();
-        cupdateBtn = new javax.swing.JButton();
-        cremoveBtn = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        customerTable = new javax.swing.JTable();
-        displayaBtn = new javax.swing.JButton();
-        crdateField = new javax.swing.JLabel();
-        cedateField = new javax.swing.JLabel();
-        cidField = new javax.swing.JLabel();
-        cSearchField = new javax.swing.JTextField();
-        cSearchBox = new javax.swing.JComboBox<>();
-        cSearchBtn = new javax.swing.JButton();
         staffTab = new javax.swing.JPanel();
         txtsearch_staff = new javax.swing.JTextField();
         ComboBox_search_staff = new javax.swing.JComboBox<>();
@@ -148,6 +123,34 @@ public class Interface extends javax.swing.JFrame {
         Button_Update_staff = new javax.swing.JButton();
         Button_Delete_staff = new javax.swing.JButton();
         Button_Refresh_Staff1 = new javax.swing.JButton();
+        customerTab = new javax.swing.JPanel();
+        cidLabel = new javax.swing.JLabel();
+        cnameLabel = new javax.swing.JLabel();
+        cphoneLabel = new javax.swing.JLabel();
+        cmailLabel = new javax.swing.JLabel();
+        caddrLabel = new javax.swing.JLabel();
+        cregdateLabel = new javax.swing.JLabel();
+        expdateLabel = new javax.swing.JLabel();
+        membershipLabel = new javax.swing.JLabel();
+        cnameField = new javax.swing.JTextField();
+        cphoneField = new javax.swing.JTextField();
+        cmailField = new javax.swing.JTextField();
+        caddrField = new javax.swing.JTextField();
+        cmembershipField = new javax.swing.JTextField();
+        ccreateBtn = new javax.swing.JButton();
+        cupdateBtn = new javax.swing.JButton();
+        cremoveBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        customerTable = new javax.swing.JTable();
+        displayaBtn = new javax.swing.JButton();
+        crdateField = new javax.swing.JLabel();
+        cedateField = new javax.swing.JLabel();
+        cidField = new javax.swing.JLabel();
+        cSearchField = new javax.swing.JTextField();
+        cSearchBox = new javax.swing.JComboBox<>();
+        cSearchBtn = new javax.swing.JButton();
+        imageCustomer = new javax.swing.JLabel();
+        cUpdateImageBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -211,6 +214,11 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        imageProfile.setText("no image");
+        imageProfile.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        imageProfile.setMaximumSize(new java.awt.Dimension(34, 18));
+        imageProfile.setMinimumSize(new java.awt.Dimension(34, 18));
+
         javax.swing.GroupLayout profileTabLayout = new javax.swing.GroupLayout(profileTab);
         profileTab.setLayout(profileTabLayout);
         profileTabLayout.setHorizontalGroup(
@@ -244,7 +252,9 @@ public class Interface extends javax.swing.JFrame {
                     .addGroup(profileTabLayout.createSequentialGroup()
                         .addComponent(refreshBtn)
                         .addGap(122, 122, 122)))
-                .addContainerGap(494, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
+                .addComponent(imageProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(160, 160, 160))
         );
         profileTabLayout.setVerticalGroup(
             profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,30 +265,35 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idLabel)
                     .addComponent(idInfo))
-                .addGap(18, 18, 18)
-                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel)
-                    .addComponent(nameInfo))
-                .addGap(18, 18, 18)
-                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phoneLabel)
-                    .addComponent(phoneInfo))
-                .addGap(18, 18, 18)
-                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailLabel)
-                    .addComponent(emailInfo))
-                .addGap(18, 18, 18)
-                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addrLabel)
-                    .addComponent(addrInfo))
-                .addGap(18, 18, 18)
-                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(shiftLabel)
-                    .addComponent(shiftInfo))
-                .addGap(18, 18, 18)
-                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(wdateLabel)
-                    .addComponent(wdateInfo))
+                .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(profileTabLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nameLabel)
+                            .addComponent(nameInfo))
+                        .addGap(18, 18, 18)
+                        .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(phoneLabel)
+                            .addComponent(phoneInfo))
+                        .addGap(18, 18, 18)
+                        .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emailLabel)
+                            .addComponent(emailInfo))
+                        .addGap(18, 18, 18)
+                        .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addrLabel)
+                            .addComponent(addrInfo))
+                        .addGap(18, 18, 18)
+                        .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(shiftLabel)
+                            .addComponent(shiftInfo))
+                        .addGap(18, 18, 18)
+                        .addGroup(profileTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(wdateLabel)
+                            .addComponent(wdateInfo)))
+                    .addGroup(profileTabLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(imageProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(48, 48, 48)
                 .addComponent(refreshBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
@@ -292,7 +307,7 @@ public class Interface extends javax.swing.JFrame {
         bookTab.setLayout(bookTabLayout);
         bookTabLayout.setHorizontalGroup(
             bookTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 811, Short.MAX_VALUE)
+            .addGap(0, 891, Short.MAX_VALUE)
         );
         bookTabLayout.setVerticalGroup(
             bookTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,7 +320,7 @@ public class Interface extends javax.swing.JFrame {
         billTab.setLayout(billTabLayout);
         billTabLayout.setHorizontalGroup(
             billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 811, Short.MAX_VALUE)
+            .addGap(0, 891, Short.MAX_VALUE)
         );
         billTabLayout.setVerticalGroup(
             billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,7 +333,7 @@ public class Interface extends javax.swing.JFrame {
         reportTab.setLayout(reportTabLayout);
         reportTabLayout.setHorizontalGroup(
             reportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 811, Short.MAX_VALUE)
+            .addGap(0, 891, Short.MAX_VALUE)
         );
         reportTabLayout.setVerticalGroup(
             reportTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,7 +346,7 @@ public class Interface extends javax.swing.JFrame {
         adminTab.setLayout(adminTabLayout);
         adminTabLayout.setHorizontalGroup(
             adminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 811, Short.MAX_VALUE)
+            .addGap(0, 891, Short.MAX_VALUE)
         );
         adminTabLayout.setVerticalGroup(
             adminTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,187 +354,6 @@ public class Interface extends javax.swing.JFrame {
         );
 
         home.addTab("Admin", adminTab);
-
-        cidLabel.setText("ID:");
-
-        cnameLabel.setText("Name:");
-
-        cphoneLabel.setText("Phone:");
-
-        cmailLabel.setText("Email:");
-
-        caddrLabel.setText("Address:");
-
-        cregdateLabel.setText("Register date:");
-
-        expdateLabel.setText("Expired date:");
-
-        membershipLabel.setText("Membership:");
-
-        ccreateBtn.setText("Create");
-        ccreateBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ccreateBtnActionPerformed(evt);
-            }
-        });
-
-        cupdateBtn.setText("Update");
-        cupdateBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cupdateBtnActionPerformed(evt);
-            }
-        });
-
-        cremoveBtn.setText("Remove");
-        cremoveBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cremoveBtnActionPerformed(evt);
-            }
-        });
-
-        customerTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Customer Name", "Phone"
-            }
-        ));
-        customerTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                customerTableMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(customerTable);
-
-        displayaBtn.setText("Display all");
-        displayaBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                displayaBtnActionPerformed(evt);
-            }
-        });
-
-        cSearchBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Phone" }));
-        cSearchBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cSearchBoxActionPerformed(evt);
-            }
-        });
-
-        cSearchBtn.setText("Search");
-        cSearchBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cSearchBtnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout customerTabLayout = new javax.swing.GroupLayout(customerTab);
-        customerTab.setLayout(customerTabLayout);
-        customerTabLayout.setHorizontalGroup(
-            customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
-                    .addGroup(customerTabLayout.createSequentialGroup()
-                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(customerTabLayout.createSequentialGroup()
-                                .addComponent(displayaBtn)
-                                .addGap(35, 35, 35)
-                                .addComponent(cSearchBtn))
-                            .addGroup(customerTabLayout.createSequentialGroup()
-                                .addComponent(cSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cSearchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 220, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
-                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerTabLayout.createSequentialGroup()
-                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(membershipLabel)
-                            .addComponent(expdateLabel)
-                            .addComponent(cregdateLabel)
-                            .addComponent(caddrLabel)
-                            .addComponent(cmailLabel)
-                            .addComponent(cphoneLabel)
-                            .addComponent(cnameLabel)
-                            .addComponent(cidLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerTabLayout.createSequentialGroup()
-                        .addComponent(ccreateBtn)
-                        .addGap(28, 28, 28)))
-                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(customerTabLayout.createSequentialGroup()
-                            .addComponent(cupdateBtn)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                            .addComponent(cremoveBtn))
-                        .addComponent(cnameField)
-                        .addComponent(cphoneField)
-                        .addComponent(cmailField)
-                        .addComponent(caddrField)
-                        .addComponent(cmembershipField))
-                    .addComponent(crdateField)
-                    .addComponent(cedateField)
-                    .addComponent(cidField))
-                .addContainerGap())
-        );
-        customerTabLayout.setVerticalGroup(
-            customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customerTabLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(customerTabLayout.createSequentialGroup()
-                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cidLabel)
-                            .addComponent(cidField))
-                        .addGap(18, 18, 18)
-                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cnameLabel)
-                            .addComponent(cnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cphoneLabel)
-                            .addComponent(cphoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmailLabel)
-                            .addComponent(cmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(caddrLabel)
-                            .addComponent(caddrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cregdateLabel)
-                            .addComponent(crdateField))
-                        .addGap(18, 18, 18)
-                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(expdateLabel)
-                            .addComponent(cedateField))
-                        .addGap(18, 18, 18)
-                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(membershipLabel)
-                            .addComponent(cmembershipField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
-                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cremoveBtn)
-                            .addComponent(cupdateBtn)
-                            .addComponent(ccreateBtn)))
-                    .addGroup(customerTabLayout.createSequentialGroup()
-                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cSearchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(displayaBtn)
-                            .addComponent(cSearchBtn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(139, Short.MAX_VALUE))
-        );
-
-        home.addTab("Customer", customerTab);
 
         staffTab.setBackground(new java.awt.Color(255, 255, 255));
         staffTab.setToolTipText("");
@@ -577,6 +411,7 @@ public class Interface extends javax.swing.JFrame {
         }
 
         image_staff.setText("Image");
+        image_staff.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         image_staff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 image_staffMouseClicked(evt);
@@ -679,7 +514,7 @@ public class Interface extends javax.swing.JFrame {
                                     .addComponent(txtname_staff)))
                             .addGroup(staffTabLayout.createSequentialGroup()
                                 .addComponent(Button_Add_Staff, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                                 .addComponent(Button_Refresh_Staff1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(Button_Update_staff, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -720,7 +555,7 @@ public class Interface extends javax.swing.JFrame {
                                     .addComponent(txtusername_staff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(23, 23, 23)
-                                .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(staffTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(staffTabLayout.createSequentialGroup()
                                         .addGap(6, 6, 6)
                                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -773,15 +608,231 @@ public class Interface extends javax.swing.JFrame {
 
         home.addTab("Staff", staffTab);
 
+        cidLabel.setText("ID:");
+
+        cnameLabel.setText("Name:");
+
+        cphoneLabel.setText("Phone:");
+
+        cmailLabel.setText("Email:");
+
+        caddrLabel.setText("Address:");
+
+        cregdateLabel.setText("Register date:");
+
+        expdateLabel.setText("Expired date:");
+
+        membershipLabel.setText("Membership:");
+
+        ccreateBtn.setText("Create");
+        ccreateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ccreateBtnActionPerformed(evt);
+            }
+        });
+
+        cupdateBtn.setText("Update info");
+        cupdateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cupdateBtnActionPerformed(evt);
+            }
+        });
+
+        cremoveBtn.setText("Remove");
+        cremoveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cremoveBtnActionPerformed(evt);
+            }
+        });
+
+        customerTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Customer Name", "Phone"
+            }
+        ));
+        customerTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customerTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(customerTable);
+
+        displayaBtn.setText("Display all");
+        displayaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                displayaBtnActionPerformed(evt);
+            }
+        });
+
+        crdateField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        cedateField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        cidField.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        cSearchBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "Phone" }));
+        cSearchBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cSearchBoxActionPerformed(evt);
+            }
+        });
+
+        cSearchBtn.setText("Search");
+        cSearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cSearchBtnActionPerformed(evt);
+            }
+        });
+
+        imageCustomer.setText("no image");
+        imageCustomer.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        imageCustomer.setMaximumSize(new java.awt.Dimension(34, 18));
+        imageCustomer.setMinimumSize(new java.awt.Dimension(34, 18));
+
+        cUpdateImageBtn.setText("Update image");
+        cUpdateImageBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cUpdateImageBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout customerTabLayout = new javax.swing.GroupLayout(customerTab);
+        customerTab.setLayout(customerTabLayout);
+        customerTabLayout.setHorizontalGroup(
+            customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(customerTabLayout.createSequentialGroup()
+                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(customerTabLayout.createSequentialGroup()
+                                .addComponent(displayaBtn)
+                                .addGap(35, 35, 35)
+                                .addComponent(cSearchBtn))
+                            .addGroup(customerTabLayout.createSequentialGroup()
+                                .addComponent(cSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cSearchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(19, 19, 19)
+                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerTabLayout.createSequentialGroup()
+                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(membershipLabel)
+                            .addComponent(expdateLabel)
+                            .addGroup(customerTabLayout.createSequentialGroup()
+                                .addComponent(imageCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cregdateLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(caddrLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cmailLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cphoneLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cnameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cidLabel, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerTabLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(cUpdateImageBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(ccreateBtn)
+                        .addGap(28, 28, 28)))
+                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(customerTabLayout.createSequentialGroup()
+                        .addComponent(cupdateBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addComponent(cremoveBtn))
+                    .addComponent(cnameField)
+                    .addComponent(cphoneField)
+                    .addComponent(cmailField)
+                    .addComponent(caddrField)
+                    .addComponent(cmembershipField)
+                    .addComponent(cidField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(crdateField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cedateField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        customerTabLayout.setVerticalGroup(
+            customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(customerTabLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(customerTabLayout.createSequentialGroup()
+                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cidField, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cidLabel))
+                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(customerTabLayout.createSequentialGroup()
+                                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cnameLabel)
+                                    .addComponent(cnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cphoneLabel)
+                                    .addComponent(cphoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cmailLabel)
+                                    .addComponent(cmailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(caddrLabel)
+                                    .addComponent(caddrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(customerTabLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cregdateLabel))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerTabLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(crdateField, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerTabLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(imageCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(3, 3, 3)))
+                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(expdateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cedateField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(membershipLabel)
+                            .addComponent(cmembershipField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46)
+                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cremoveBtn)
+                            .addComponent(cupdateBtn)
+                            .addComponent(ccreateBtn)
+                            .addComponent(cUpdateImageBtn)))
+                    .addGroup(customerTabLayout.createSequentialGroup()
+                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cSearchBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(displayaBtn)
+                            .addComponent(cSearchBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(134, Short.MAX_VALUE))
+        );
+
+        home.addTab("Customer", customerTab);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 896, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+            .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
         );
 
         pack();
@@ -808,7 +859,7 @@ public class Interface extends javax.swing.JFrame {
     private void customerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerTableMouseClicked
         int d = (int)customerTable.getValueAt(customerTable.getSelectedRow(), 0);
         CustomerController.getCustomerByID(d, cidField, cnameField, cphoneField, cmailField, caddrField,
-                crdateField, cedateField, cmembershipField);
+                crdateField, cedateField, cmembershipField, imageCustomer);
     }//GEN-LAST:event_customerTableMouseClicked
 
     private void cremoveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cremoveBtnActionPerformed
@@ -829,6 +880,7 @@ public class Interface extends javax.swing.JFrame {
             crdateField.setText(null);
             cedateField.setText(null);
             cmembershipField.setText(null);
+            imageCustomer.setIcon(null);
         }  
     }//GEN-LAST:event_cremoveBtnActionPerformed
 
@@ -894,6 +946,14 @@ public class Interface extends javax.swing.JFrame {
         stf.DisplayAllStaff(Table_Staff);
     }//GEN-LAST:event_Button_Delete_staffActionPerformed
 
+    private void cUpdateImageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cUpdateImageBtnActionPerformed
+        if (cidField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please choose a customer from customer table");
+        } else {
+            CustomerController.updateImageCustomer(cidField, imageCustomer);
+        }
+    }//GEN-LAST:event_cUpdateImageBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -944,6 +1004,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cSearchBox;
     private javax.swing.JButton cSearchBtn;
     private javax.swing.JTextField cSearchField;
+    private javax.swing.JButton cUpdateImageBtn;
     private javax.swing.JTextField caddrField;
     private javax.swing.JLabel caddrLabel;
     private javax.swing.JButton ccreateBtn;
@@ -973,6 +1034,8 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel idInfo;
     private javax.swing.JLabel idLabel;
     private javax.swing.JLabel id_staff;
+    private javax.swing.JLabel imageCustomer;
+    private javax.swing.JLabel imageProfile;
     private javax.swing.JLabel image_staff;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

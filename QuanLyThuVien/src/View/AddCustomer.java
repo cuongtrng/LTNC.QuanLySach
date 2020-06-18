@@ -6,6 +6,17 @@
 package View;
 
 import Controller.CustomerController;
+import Controller.StaffController;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 
 /**
  *
@@ -18,6 +29,16 @@ public class AddCustomer extends javax.swing.JFrame {
      */
     public AddCustomer() {
         initComponents();
+    }
+    
+    private static void getImagePath(JLabel path){
+        JFileChooser fc=new JFileChooser();
+        fc.showOpenDialog(null);
+        if(fc.getSelectedFile()!=null)
+        {
+            String s=fc.getSelectedFile().getAbsolutePath();
+            path.setText(s);
+        }
     }
 
     /**
@@ -41,6 +62,9 @@ public class AddCustomer extends javax.swing.JFrame {
         addrField = new javax.swing.JTextField();
         membershipField = new javax.swing.JTextField();
         addBtn = new javax.swing.JButton();
+        imageLabel = new javax.swing.JLabel();
+        imagePath = new javax.swing.JLabel();
+        chooseImageBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,6 +88,17 @@ public class AddCustomer extends javax.swing.JFrame {
             }
         });
 
+        imageLabel.setText("Image");
+
+        imagePath.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        chooseImageBtn.setText("Choose");
+        chooseImageBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chooseImageBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,16 +115,20 @@ public class AddCustomer extends javax.swing.JFrame {
                             .addComponent(phoneLabel)
                             .addComponent(emailLabel)
                             .addComponent(addrLabel)
-                            .addComponent(membershipLabel))
+                            .addComponent(membershipLabel)
+                            .addComponent(imageLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(addBtn)
-                            .addComponent(nameField)
-                            .addComponent(phoneField)
-                            .addComponent(emailField)
-                            .addComponent(addrField)
-                            .addComponent(membershipField, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))))
-                .addContainerGap(55, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chooseImageBtn)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(nameField)
+                                .addComponent(phoneField)
+                                .addComponent(emailField)
+                                .addComponent(addrField)
+                                .addComponent(membershipField, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                                .addComponent(addBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(imagePath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,16 +156,26 @@ public class AddCustomer extends javax.swing.JFrame {
                     .addComponent(membershipLabel)
                     .addComponent(membershipField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(imageLabel)
+                    .addComponent(imagePath, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(chooseImageBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(addBtn)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        CustomerController.addCustomer(nameField, phoneField, emailField, addrField, membershipField);
+        CustomerController.addCustomer(nameField, phoneField, emailField, addrField, membershipField, imagePath);
     }//GEN-LAST:event_addBtnActionPerformed
+
+    private void chooseImageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseImageBtnActionPerformed
+        getImagePath(imagePath);
+    }//GEN-LAST:event_chooseImageBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,8 +216,11 @@ public class AddCustomer extends javax.swing.JFrame {
     private javax.swing.JButton addBtn;
     private javax.swing.JTextField addrField;
     private javax.swing.JLabel addrLabel;
+    private javax.swing.JButton chooseImageBtn;
     private javax.swing.JTextField emailField;
     private javax.swing.JLabel emailLabel;
+    private javax.swing.JLabel imageLabel;
+    private javax.swing.JLabel imagePath;
     private javax.swing.JTextField membershipField;
     private javax.swing.JLabel membershipLabel;
     private javax.swing.JTextField nameField;
