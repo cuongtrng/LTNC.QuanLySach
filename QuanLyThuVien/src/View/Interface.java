@@ -6,6 +6,7 @@
 package View;
 
 import Controller.AdminController;
+import Controller.BillController;
 import Controller.CustomerController;
 import Controller.ProfileController;
 import Controller.StaffController;
@@ -17,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,14 +28,18 @@ public class Interface extends javax.swing.JFrame {
     
     // id cua nguoi dung
     int id_user;
+    int totalprice=0;
+
     // loai tai khoan 0 =admin, 1 = staff
     boolean type;
+    
     private String ImagePath;
     public Interface(int i, boolean t) {
+        id_user = i;  type = t;
         initComponents();
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTitle("Home");
-        id_user = i;  type = t;
+//        id_user = i;  type = t;
         reloadProfile();
         if (type){
 //            adminBtn.setEnabled(false);
@@ -92,6 +98,18 @@ public class Interface extends javax.swing.JFrame {
         refreshBtn = new javax.swing.JButton();
         bookTab = new javax.swing.JPanel();
         billTab = new javax.swing.JPanel();
+        CustomerIdLabel = new javax.swing.JLabel();
+        CustomerId = new javax.swing.JTextField();
+        Displayall = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        StaffId = new javax.swing.JTextField();
+        IdBill = new javax.swing.JTextField();
+        CreateBill = new javax.swing.JButton();
+        AddDetailButton = new javax.swing.JButton();
+        RemoveDetail = new javax.swing.JButton();
         reportTab = new javax.swing.JPanel();
         customerTab = new javax.swing.JPanel();
         cidLabel = new javax.swing.JLabel();
@@ -326,15 +344,134 @@ public class Interface extends javax.swing.JFrame {
 
         home.addTab("Book", bookTab);
 
+        CustomerIdLabel.setText("CustomerId");
+
+        CustomerId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CustomerIdActionPerformed(evt);
+            }
+        });
+
+        Displayall.setText("DisplayBill");
+        Displayall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DisplayallActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "BookId", "Amount", "Price"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jTable1);
+
+        jLabel16.setText("StaffId:");
+
+        jLabel17.setText("IDNumber:");
+
+        StaffId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StaffIdActionPerformed(evt);
+            }
+        });
+        StaffId.setText(""+id_user);
+
+        IdBill.setText(""+(1+BillController.getBillId()));
+
+        CreateBill.setText("CreateBill");
+        CreateBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateBillActionPerformed(evt);
+            }
+        });
+
+        AddDetailButton.setText("AddDetail");
+        AddDetailButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddDetailButtonActionPerformed(evt);
+            }
+        });
+
+        RemoveDetail.setText("RemoveDetail");
+        RemoveDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveDetailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout billTabLayout = new javax.swing.GroupLayout(billTab);
         billTab.setLayout(billTabLayout);
         billTabLayout.setHorizontalGroup(
             billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
+            .addGroup(billTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(billTabLayout.createSequentialGroup()
+                        .addComponent(CustomerIdLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(CustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Displayall)
+                    .addGroup(billTabLayout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(billTabLayout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addGroup(billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(billTabLayout.createSequentialGroup()
+                                        .addComponent(jLabel16)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(StaffId, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(billTabLayout.createSequentialGroup()
+                                        .addComponent(jLabel17)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(IdBill))))
+                            .addGroup(billTabLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CreateBill)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(AddDetailButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(RemoveDetail)))))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         billTabLayout.setVerticalGroup(
             billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 794, Short.MAX_VALUE)
+            .addGroup(billTabLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CustomerIdLabel)
+                    .addComponent(CustomerId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Displayall)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(billTabLayout.createSequentialGroup()
+                        .addGroup(billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(StaffId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(IdBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(184, 184, 184)
+                        .addGroup(billTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CreateBill)
+                            .addComponent(AddDetailButton)
+                            .addComponent(RemoveDetail))))
+                .addContainerGap(288, Short.MAX_VALUE))
         );
 
         home.addTab("Bill", billTab);
@@ -1132,6 +1269,68 @@ public class Interface extends javax.swing.JFrame {
         ad.DisplayAllAdmin(Table_Admin);
     }//GEN-LAST:event_Button_Delete_AdminActionPerformed
 
+    private void CustomerIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CustomerIdActionPerformed
+
+    private void DisplayallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayallActionPerformed
+        // TODO add your handling code here:
+        new DisplayBill().setVisible(true);
+    }//GEN-LAST:event_DisplayallActionPerformed
+
+    private void StaffIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StaffIdActionPerformed
+
+    private void CreateBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBillActionPerformed
+        // TODO add your handling code here:
+        BillController.addBill(CustomerId,StaffId.getText(),totalprice);
+        new PrintBill().setVisible(true); 
+        totalprice=0;
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.setRowCount(0);
+        IdBill.setText(""+(1+BillController.getBillId()));
+        
+    }//GEN-LAST:event_CreateBillActionPerformed
+
+    private void AddDetailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddDetailButtonActionPerformed
+        // TODO add your handling code here:
+        AddBillDetail a = new AddBillDetail();
+        a.setVisible(true);
+        a.addWindowListener(new java.awt.event.WindowAdapter(){
+            public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                String bookid = a.getbookid();
+                String amount = a.getamount();
+                String price = BillController.getPrice(bookid);
+                if(price == null){
+                JOptionPane.showMessageDialog(null, "invalid bookid");
+                }
+                else{
+                DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
+                m.addRow(new Object[] {bookid,amount,Integer.parseInt(amount)*Integer.parseInt(price)});                
+                
+                totalprice = totalprice + Integer.parseInt(amount)*Integer.parseInt(price);
+                
+                System.out.println(totalprice);
+//                System.out.println(a.getamount());
+                }
+                
+                a.setVisible(false);
+            }
+            
+        });
+    }//GEN-LAST:event_AddDetailButtonActionPerformed
+
+    private void RemoveDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveDetailActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) this.jTable1.getModel();
+        int[] rows = jTable1.getSelectedRows();
+        for(int i=0;i<rows.length;i++){
+            totalprice -= Integer.parseInt(""+jTable1.getValueAt(rows[i]-i, 2));
+            model.removeRow(rows[i]-i);
+        }
+    }//GEN-LAST:event_RemoveDetailActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1168,6 +1367,7 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddDetailButton;
     private javax.swing.JButton Button_Add_Admin;
     private javax.swing.JButton Button_Add_Staff;
     private javax.swing.JButton Button_Delete_Admin;
@@ -1180,8 +1380,15 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton Button_Update_staff;
     private javax.swing.JComboBox<String> ComboBox_search_admin;
     private javax.swing.JComboBox<String> ComboBox_search_staff;
+    private javax.swing.JButton CreateBill;
+    private javax.swing.JTextField CustomerId;
+    private javax.swing.JLabel CustomerIdLabel;
+    private javax.swing.JButton Displayall;
+    private javax.swing.JTextField IdBill;
     private javax.swing.JLabel Image_Admin;
     private javax.swing.JLabel Label_ID_Admin;
+    private javax.swing.JButton RemoveDetail;
+    private javax.swing.JTextField StaffId;
     private javax.swing.JTable Table_Admin;
     private javax.swing.JTable Table_Staff;
     private javax.swing.JLabel addrInfo;
@@ -1228,6 +1435,8 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1239,6 +1448,8 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel membershipLabel;
     private javax.swing.JLabel nameInfo;
